@@ -14,24 +14,30 @@ const MoveGrid = () => {
   }
   const NoExit = () => <td className="no-exit"></td>
 
+  // 9x9 grid for now
+  const rows = [
+    ["a1", "a2", "a3"],
+    ["b1", "b2", "b3"],
+    ["c1", "c2", "c3"],
+  ]
+
   return (
     <table id="move-grid">
       <tbody>
-        <tr>
-          {exits?.a1 ? <Exit exitName={exits.a1} /> : <NoExit />}
-          {exits?.a2 ? <Exit exitName={exits.a2} /> : <NoExit />}
-          {exits?.a3 ? <Exit exitName={exits.a3} /> : <NoExit />}
-        </tr>
-        <tr>
-          {exits?.b1 ? <Exit exitName={exits.b1} /> : <NoExit />}
-          {exits?.b2 ? <Exit exitName={exits.b2} /> : <NoExit />}
-          {exits?.b3 ? <Exit exitName={exits.b3} /> : <NoExit />}
-        </tr>
-        <tr>
-          {exits?.c1 ? <Exit exitName={exits.c1} /> : <NoExit />}
-          {exits?.c2 ? <Exit exitName={exits.c2} /> : <NoExit />}
-          {exits?.c3 ? <Exit exitName={exits.c3} /> : <NoExit />}
-        </tr>
+        {rows.map((row, rowIndex) => (
+          <tr key={rowIndex}>
+            {row.map((cell) =>
+              exits?.[cell] ? (
+                <Exit
+                  key={cell}
+                  exitName={exits[cell]}
+                />
+              ) : (
+                <NoExit key={cell} />
+              )
+            )}
+          </tr>
+        ))}
       </tbody>
     </table>
   )
