@@ -6,7 +6,7 @@ const Viewport = () => {
     <div
       id="viewport"
       className={css`
-        background: url(./src/images/${currentRoom?.image});
+        background: url(/react-jam/images/${currentRoom?.image});
         background-size: cover;
       `}
     ></div>

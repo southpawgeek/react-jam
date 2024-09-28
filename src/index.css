@@ -1,6 +1,6 @@
 @font-face {
   font-family: pixel;
-  src: url(./assets/Beanstalk.ttf);
+  src: url(/react-jam/Beanstalk.ttf);
 }
 
 :root {
