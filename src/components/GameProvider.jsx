@@ -7,14 +7,16 @@ export const GameProvider = ({ children }) => {
     start: {
       name: "beginning",
       exits: { a2: "foyer" },
-      description: "this room only has an exit to the north",
+      description: ["This room only has an exit to the north."],
     },
     foyer: {
       name: "foyer",
-      exits: { c2: "start", b2: "everywhere" },
-      description: "not much in here",
+      exits: { c2: "start", b2: "nowhere" },
+      description: [
+        "There's a giant hole in the center of this room. Blue magic swirls out of it.",
+      ],
     },
-    everywhere: {
+    nowhere: {
       name: "just go back home",
       exits: {
         a1: "start",
@@ -27,7 +29,7 @@ export const GameProvider = ({ children }) => {
         c2: "start",
         c3: "start",
       },
-      description: "all roads go to the same place",
+      description: ["all roads go to the same place"],
     },
   }
   const [currentRoom, setCurrentRoom] = useState(rooms.start)

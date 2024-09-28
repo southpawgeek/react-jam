@@ -60,3 +60,7 @@ td.no-exit {
   float: right;
   border: 1px solid magenta;
 }
+
+#description p {
+  padding: 0 1rem;
+}
