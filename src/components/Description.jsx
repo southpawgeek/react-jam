@@ -4,6 +4,7 @@ const Description = () => {
   const { currentRoom } = useGameProvider()
   return (
     <div id="description">
+      <h1>{currentRoom.name}</h1>
       <p>
         <ReactTyped
           strings={currentRoom.description}

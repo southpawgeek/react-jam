@@ -53,6 +53,12 @@ td.no-exit {
   border: none;
 }
 
+h1 {
+  font-size: 1.1rem;
+  margin: 0;
+  text-align: center;
+}
+
 #description {
   width: 38.25rem;
   height: 10rem;
