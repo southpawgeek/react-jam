@@ -2,7 +2,9 @@ import { css } from "@emotion/css"
 import { useGameProvider } from "./GameProvider"
 const Viewport = () => {
   const {
+    rooms,
     currentRoom,
+    setCurrentRoom,
     currentAction,
     setCurrentAction,
     setCurrentDescription,
@@ -26,8 +28,15 @@ const Viewport = () => {
   }
 
   const handleAction = (sector) => {
-    if (actions?.[sector]?.[currentAction]) {
-      setCurrentDescription(actions[sector][currentAction])
+    if (actions?.[sector]?.[currentAction]?.description) {
+      setCurrentDescription(actions[sector][currentAction].description)
+      setCurrentAction("")
+    }
+
+    if (actions?.[sector]?.[currentAction]?.nextRoom) {
+      const nextRoom = rooms[actions[sector][currentAction].nextRoom]
+      setCurrentRoom(nextRoom)
+      setCurrentDescription(nextRoom.description)
       setCurrentAction("")
     }
   }
