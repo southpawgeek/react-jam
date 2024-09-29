@@ -11,6 +11,9 @@ export const GameProvider = ({ children }) => {
       description: [
         "You don't remember how you got here. The room is tiny, with only one <br/>discernible exit.",
       ],
+      use: [],
+      hit: [],
+      examine: [],
     },
     foyer: {
       name: "The Vortex",
@@ -19,6 +22,9 @@ export const GameProvider = ({ children }) => {
       description: [
         "There's a giant hole in the center of this room. Blue energy lazily swirls out of it. The energy is being siphoned out into what appears to be deep space.",
       ],
+      use: [],
+      hit: [],
+      examine: [],
     },
     nowhere: {
       name: "Nowhere?",
@@ -34,6 +40,9 @@ export const GameProvider = ({ children }) => {
         c2: "start",
         c3: "start",
       },
+      use: [],
+      hit: [],
+      examine: [],
       description: ["all roads go to the same place"],
     },
     death: {
@@ -41,16 +50,21 @@ export const GameProvider = ({ children }) => {
       image: "death.jpg",
       exits: { b2: "start" },
       description: ["Unfortunately, you didn't survive."],
+      use: [],
+      hit: [],
+      examine: [],
     },
   }
   const [currentRoom, setCurrentRoom] = useState(rooms.start)
-  const [currentDescription, setCurrentDescription] = useState(rooms.start.description)
+  const [currentDescription, setCurrentDescription] = useState(
+    rooms.start.description
+  )
 
   const [currentItem, setCurrentItem] = useState("")
   const inventory = ["key"]
 
   const [currentAction, setCurrentAction] = useState("")
-  const actions = ["examine", "use", "take", "hit"]
+  const actions = ["examine", "use", "hit"]
   return (
     <GameContext.Provider
       value={{

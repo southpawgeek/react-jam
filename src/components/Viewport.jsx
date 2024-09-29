@@ -1,8 +1,12 @@
 import { css } from "@emotion/css"
 import { useGameProvider } from "./GameProvider"
-import { useState } from "react"
 const Viewport = () => {
-  const { currentRoom, currentAction } = useGameProvider()
+  const {
+    currentRoom,
+    currentAction,
+    setCurrentAction,
+    setCurrentDescription,
+  } = useGameProvider()
 
   let currentCursor = "default"
 
@@ -19,15 +23,32 @@ const Viewport = () => {
     currentCursor = "grabbing"
   }
 
+  const handleAction = (sector) => {
+    if (currentAction) {
+      setCurrentDescription([
+        `You ${currentAction} the ${sector} sector. Placeholder text occurs.`,
+      ])
+      setCurrentAction("")
+    }
+  }
+
   return (
     <div
-      id='viewport'
+      id="viewport"
       className={css`
         background: url(/react-jam/images/${currentRoom?.image});
         background-size: cover;
         cursor: ${currentCursor};
       `}
-    ></div>
+    >
+      <table id="actions-grid">
+        <tbody>
+          <tr>
+            <td onClick={() => handleAction("a1")}></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   )
 }
 
