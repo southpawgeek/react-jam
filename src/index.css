@@ -72,6 +72,7 @@ hr {
 }
 
 .active-action {
+  cursor: default;
   text-decoration: underline;
 }
 
@@ -109,7 +110,7 @@ td.no-exit {
 
 #description {
   font-size: 1.5rem;
-  width: 37.75rem;
+  width: 38rem;
   height: 9.5rem;
   margin: 0.25rem 0.5rem 0.5rem 0.25rem;
   float: right;

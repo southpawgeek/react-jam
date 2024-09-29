@@ -1,14 +1,14 @@
 import { ReactTyped } from "react-typed"
 import { useGameProvider } from "./GameProvider"
 const Description = () => {
-  const { currentRoom } = useGameProvider()
+  const { currentRoom, currentDescription } = useGameProvider()
   return (
     <div id="description">
       <h1>{currentRoom.name}</h1>
       <hr />
       <p>
         <ReactTyped
-          strings={currentRoom.description}
+          strings={currentDescription}
           typeSpeed={20}
           showCursor={false}
         />

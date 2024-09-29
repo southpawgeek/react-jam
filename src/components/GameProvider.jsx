@@ -44,16 +44,19 @@ export const GameProvider = ({ children }) => {
     },
   }
   const [currentRoom, setCurrentRoom] = useState(rooms.start)
+  const [currentDescription, setCurrentDescription] = useState(rooms.start.description)
 
   const [currentItem, setCurrentItem] = useState("")
   const inventory = ["key"]
 
   const [currentAction, setCurrentAction] = useState("")
-  const actions = ["look", "use", "take", "hit"]
+  const actions = ["examine", "use", "take", "hit"]
   return (
     <GameContext.Provider
       value={{
         rooms,
+        currentDescription,
+        setCurrentDescription,
         currentRoom,
         setCurrentRoom,
         inventory,

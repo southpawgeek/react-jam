@@ -8,7 +8,7 @@ const Inventory = () => {
       <hr />
       <ul>
         {inventory.map((item) => (
-          <li>{item}</li>
+          <li key={item}>{item}</li>
         ))}
       </ul>
     </div>

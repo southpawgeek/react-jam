@@ -1,14 +1,19 @@
 import { useGameProvider } from "./GameProvider"
 
 const MoveGrid = () => {
-  const { rooms, currentRoom, setCurrentRoom } = useGameProvider()
+  const { rooms, currentRoom, setCurrentRoom, setCurrentDescription } = useGameProvider()
   const exits = currentRoom.exits
+
+  const handleExit = (exit) => {
+    setCurrentRoom(exit)
+    setCurrentDescription(exit.description)
+  }
 
   const Exit = ({ exitName }) => {
     const exit = rooms[exitName]
     return (
       <td className="exit">
-        <button onClick={() => setCurrentRoom(exit)} />
+        <button onClick={() => handleExit(exit)} />
       </td>
     )
   }

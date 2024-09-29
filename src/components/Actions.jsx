@@ -1,7 +1,18 @@
 import { useGameProvider } from "./GameProvider"
 
 const Actions = () => {
-  const { actions, currentAction, setCurrentAction } = useGameProvider()
+  const { currentRoom, setCurrentDescription, actions, currentAction, setCurrentAction } = useGameProvider()
+
+  const handleSelect = (action) => {
+    setCurrentAction(action)
+    const description = `What would you like to ${action}?`
+    setCurrentDescription([description])
+  }
+
+  const handleCancel = () => {
+    setCurrentAction("")
+    setCurrentDescription(currentRoom.description)
+  }
 
   const Active = ({ action }) => (
     <>
@@ -9,7 +20,7 @@ const Actions = () => {
       &nbsp;
       <span
         className='active-cancel'
-        onClick={() => setCurrentAction("")}
+        onClick={() => handleCancel()}
       >
         x
       </span>
@@ -20,7 +31,7 @@ const Actions = () => {
     <span
       className='inactive-action'
       onClick={() => {
-        setCurrentAction(action)
+        handleSelect(action)
       }}
     >
       {action}
@@ -33,7 +44,7 @@ const Actions = () => {
       <hr />
       <ul>
         {actions.map((action) => (
-          <li>
+          <li key={action}>
             {action === currentAction ? (
               <Active action={action} />
             ) : (

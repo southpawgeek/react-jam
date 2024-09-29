@@ -6,7 +6,7 @@ const Viewport = () => {
 
   let currentCursor = "default"
 
-  if (currentAction === "look") {
+  if (currentAction === "examine") {
     currentCursor = "help"
   }
   if (currentAction === "use") {
