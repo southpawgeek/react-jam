@@ -42,7 +42,7 @@ hr {
   border: 0.25rem solid var(--ui-border);
 }
 
-#inventory {
+#sidebar {
   font-size: 1.5rem;
   padding: 0;
   width: 20rem;
@@ -53,13 +53,31 @@ hr {
   background-color: var(--ui-background);
 }
 
-#inventory ul {
+#inventory ul, #actions ul {
   list-style-type: square;
   margin: 0;
+  text-transform: capitalize;
 }
 
-#inventory li {
+#inventory ul {
+  height: 15.5rem;
+}
+
+#inventory li, #actions ul {
   margin-left: 1rem;
+}
+
+.inactive-action, .active-cancel, td.exit button {
+  cursor: pointer;
+}
+
+.active-action {
+  text-decoration: underline;
+}
+
+.active-cancel {
+  font-size: 1.5rem;
+  text-transform: none;
 }
 
 #move-grid {

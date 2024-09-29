@@ -45,10 +45,24 @@ export const GameProvider = ({ children }) => {
   }
   const [currentRoom, setCurrentRoom] = useState(rooms.start)
 
-  const inventory = ["Key"]
+  const [currentItem, setCurrentItem] = useState("")
+  const inventory = ["key"]
+
+  const [currentAction, setCurrentAction] = useState("")
+  const actions = ["look", "use", "take", "hit"]
   return (
     <GameContext.Provider
-      value={{ rooms, currentRoom, setCurrentRoom, inventory }}
+      value={{
+        rooms,
+        currentRoom,
+        setCurrentRoom,
+        inventory,
+        currentItem,
+        setCurrentItem,
+        actions,
+        currentAction,
+        setCurrentAction,
+      }}
     >
       {children}
     </GameContext.Provider>
