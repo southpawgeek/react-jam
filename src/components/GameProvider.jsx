@@ -6,7 +6,7 @@ export const GameProvider = ({ children }) => {
   const rooms = {
     start: {
       name: "In The Beginning",
-      image: "beginning.jpg",
+      image: "beginning.png",
       exits: { a2: "foyer" },
       description: [
         "You don't remember how you got here. The room is tiny, with only one <br/>discernible exit.",
@@ -31,7 +31,7 @@ export const GameProvider = ({ children }) => {
     },
     foyer: {
       name: "The Vortex",
-      image: "foyer.jpg",
+      image: "foyer.png",
       exits: { a1: "birdroom", c2: "start", b2: "nowhere", a3: "death" },
       description: [
         "There's a giant hole in the center of this room. Blue energy lazily swirls out of it. The energy is being siphoned out into what appears to be deep space. A window to the left looks like you could crawk through it.",
@@ -48,7 +48,7 @@ export const GameProvider = ({ children }) => {
     },
     birdroom: {
       name: "Beebee's Room",
-      image: "birdcage.jpg",
+      image: "birdcage.png",
       description: [
         "The cozy room has a bird cage by the window. There's a chair next to the cage.",
       ],
@@ -64,7 +64,7 @@ export const GameProvider = ({ children }) => {
     },
     deathBeebee: {
       name: "Game Over",
-      image: "death-beebee.jpg",
+      image: "death-beebee.png",
       exits: { b2: "start" },
       description: [
         "Upon opening the cage, Beebee quickly escapes. His first course of action is to fly at your face, pecking out your eyes.",
@@ -73,7 +73,7 @@ export const GameProvider = ({ children }) => {
     },
     nowhere: {
       name: "Nowhere?",
-      image: "nowhere.jpg",
+      image: "nowhere.png",
       exits: {
         a1: "start",
         a2: "start",
@@ -90,7 +90,7 @@ export const GameProvider = ({ children }) => {
     },
     death: {
       name: "Game Over",
-      image: "death.jpg",
+      image: "death.png",
       exits: { b2: "start" },
       description: ["Unfortunately, you didn't survive."],
       actions: {
