@@ -11,9 +11,17 @@ export const GameProvider = ({ children }) => {
       description: [
         "You don't remember how you got here. The room is tiny, with only one <br/>discernible exit.",
       ],
-      use: [],
-      hit: [],
-      examine: [],
+      actions: {
+        a1: {
+          examine: ["There isn't much to look at here."],
+          hit: [
+            "You attempt to hit the emptiness in the doorway. You stumble forward <br/>awkwardly.",
+          ],
+          use: [
+            "You ponder the infinite ways in which you could use an open doorway.",
+          ],
+        },
+      },
     },
     foyer: {
       name: "The Vortex",
@@ -22,9 +30,13 @@ export const GameProvider = ({ children }) => {
       description: [
         "There's a giant hole in the center of this room. Blue energy lazily swirls out of it. The energy is being siphoned out into what appears to be deep space.",
       ],
-      use: [],
-      hit: [],
-      examine: [],
+      actions: {
+        a1: {
+          examine: [
+            "The portal beckons to you. The giant vacuum hole sucking everything into space <br />also looks interesting, but you question its safety.",
+          ],
+        },
+      },
     },
     nowhere: {
       name: "Nowhere?",
@@ -40,9 +52,7 @@ export const GameProvider = ({ children }) => {
         c2: "start",
         c3: "start",
       },
-      use: [],
-      hit: [],
-      examine: [],
+      actions: {},
       description: ["all roads go to the same place"],
     },
     death: {
@@ -50,9 +60,16 @@ export const GameProvider = ({ children }) => {
       image: "death.jpg",
       exits: { b2: "start" },
       description: ["Unfortunately, you didn't survive."],
-      use: [],
-      hit: [],
-      examine: [],
+      actions: {
+        a1: {
+          examine: [
+            "The skull stares at you through eyeless sockets. You can't help but feel like <br />you're being judged.",
+          ],
+          hit: [
+            "You focus all of your fury upon the weird floating skull before you. Alas, you are still dead. But, you feel a little better now.",
+          ],
+        },
+      },
     },
   }
   const [currentRoom, setCurrentRoom] = useState(rooms.start)

@@ -8,6 +8,8 @@ const Viewport = () => {
     setCurrentDescription,
   } = useGameProvider()
 
+  const actions = currentRoom.actions
+
   let currentCursor = "default"
 
   if (currentAction === "examine") {
@@ -24,10 +26,8 @@ const Viewport = () => {
   }
 
   const handleAction = (sector) => {
-    if (currentAction) {
-      setCurrentDescription([
-        `You ${currentAction} the ${sector} sector. Placeholder text occurs.`,
-      ])
+    if (actions?.[sector]?.[currentAction]) {
+      setCurrentDescription(actions[sector][currentAction])
       setCurrentAction("")
     }
   }
