@@ -8,7 +8,9 @@ export const GameProvider = ({ children }) => {
       name: "In The Beginning",
       image: "beginning.jpg",
       exits: { a2: "foyer" },
-      description: ["This room only has an exit to the north."],
+      description: [
+        "You don't remember how you got here. The room is tiny, with only one <br/>discernible exit.",
+      ],
     },
     foyer: {
       name: "The Vortex",
@@ -42,8 +44,12 @@ export const GameProvider = ({ children }) => {
     },
   }
   const [currentRoom, setCurrentRoom] = useState(rooms.start)
+
+  const inventory = ["Key"]
   return (
-    <GameContext.Provider value={{ rooms, currentRoom, setCurrentRoom }}>
+    <GameContext.Provider
+      value={{ rooms, currentRoom, setCurrentRoom, inventory }}
+    >
       {children}
     </GameContext.Provider>
   )
