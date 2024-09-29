@@ -5,6 +5,7 @@ const Viewport = () => {
     rooms,
     currentRoom,
     setCurrentRoom,
+    addVisitedRoom,
     currentAction,
     setCurrentAction,
     setCurrentDescription,
@@ -36,6 +37,7 @@ const Viewport = () => {
     if (actions?.[sector]?.[currentAction]?.nextRoom) {
       const nextRoom = rooms[actions[sector][currentAction].nextRoom]
       setCurrentRoom(nextRoom)
+      addVisitedRoom(nextRoom.key)
       setCurrentDescription(nextRoom.description)
       setCurrentAction("")
     }

@@ -8,5 +8,8 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 ---
+
 [Beanstalk font by MistressEllipsis](https://www.pentacom.jp/pentacom/bitfontmaker2/gallery/?id=158)
 [react-typed by ssbeefeater](https://www.npmjs.com/package/react-typed)
+[Placeholder images generated with Microsoft Designer](https://designer.microsoft.com/image-creator)
+[Placeholder images processed with Pixel It](https://giventofly.github.io/pixelit/)

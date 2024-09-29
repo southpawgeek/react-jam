@@ -53,18 +53,24 @@ hr {
   background-color: var(--ui-background);
 }
 
-#inventory ul, #actions ul {
+#tasks ul, #actions ul {
   list-style-type: square;
   margin: 0;
   text-transform: capitalize;
 }
 
-#inventory ul {
+#tasks ul {
   height: 15.5rem;
 }
 
-#inventory li, #actions ul {
+#tasks li, #actions ul {
   margin-left: 1rem;
+}
+
+.task-completed {
+  text-decoration: line-through;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 1px;
 }
 
 .inactive-action, .active-cancel, td.exit button {

@@ -5,6 +5,7 @@ const GameContext = createContext()
 export const GameProvider = ({ children }) => {
   const rooms = {
     start: {
+      key: "start",
       name: "In The Beginning",
       image: "beginning.png",
       exits: { a2: "foyer" },
@@ -30,9 +31,10 @@ export const GameProvider = ({ children }) => {
       },
     },
     foyer: {
+      key: "foyer",
       name: "The Vortex",
       image: "foyer.png",
-      exits: { a1: "birdroom", c2: "start", b2: "nowhere", a3: "death" },
+      exits: { a1: "birdroom", c2: "start", b2: "nowhere", a3: "deathVortex" },
       description: [
         "There's a giant hole in the center of this room. Blue energy lazily swirls out of it. The energy is being siphoned out into what appears to be deep space. A window to the left looks like you could crawk through it.",
       ],
@@ -47,6 +49,7 @@ export const GameProvider = ({ children }) => {
       },
     },
     birdroom: {
+      key: "birdroom",
       name: "Beebee's Room",
       image: "birdcage.png",
       description: [
@@ -63,6 +66,7 @@ export const GameProvider = ({ children }) => {
       },
     },
     deathBeebee: {
+      key: "deathBeebee",
       name: "Game Over",
       image: "death-beebee.png",
       exits: { b2: "start" },
@@ -72,6 +76,7 @@ export const GameProvider = ({ children }) => {
       actions: {},
     },
     nowhere: {
+      key: "nowhere",
       name: "Nowhere?",
       image: "nowhere.png",
       exits: {
@@ -88,11 +93,14 @@ export const GameProvider = ({ children }) => {
       actions: {},
       description: ["all roads go to the same place"],
     },
-    death: {
+    deathVortex: {
+      key: "deathVortex",
       name: "Game Over",
       image: "death.png",
       exits: { b2: "start" },
-      description: ["Unfortunately, you didn't survive."],
+      description: [
+        "Unfortunately, you didn't survive the cold vacuum of space.",
+      ],
       actions: {
         a1: {
           examine: {
@@ -114,8 +122,26 @@ export const GameProvider = ({ children }) => {
     rooms.start.description
   )
 
-  const [currentItem, setCurrentItem] = useState("")
-  const inventory = ["key"]
+  const tasks = [
+    {
+      key: "deathBeebee",
+      name: "Meet Beebee",
+    },
+    {
+      key: "deathVortex",
+      name: "Explore Space",
+    },
+  ]
+
+  const [visitedRooms, setVisitedRooms] = useState(["start"])
+  const addVisitedRoom = (roomKey) => {
+    const index = visitedRooms.indexOf(roomKey)
+    if (index === -1) {
+      let updatedRooms = [...visitedRooms]
+      updatedRooms.push(roomKey)
+      setVisitedRooms(updatedRooms)
+    }
+  }
 
   const [currentAction, setCurrentAction] = useState("")
   const actions = ["examine", "use", "hit"]
@@ -127,9 +153,9 @@ export const GameProvider = ({ children }) => {
         setCurrentDescription,
         currentRoom,
         setCurrentRoom,
-        inventory,
-        currentItem,
-        setCurrentItem,
+        tasks,
+        visitedRooms,
+        addVisitedRoom,
         actions,
         currentAction,
         setCurrentAction,
