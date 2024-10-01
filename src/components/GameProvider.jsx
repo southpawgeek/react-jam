@@ -68,7 +68,7 @@ export const GameProvider = ({ children }) => {
     deathBeebee: {
       key: "deathBeebee",
       name: "Game Over",
-      image: "death-beebee.png",
+      image: "deathBeebee.png",
       exits: { b2: "start" },
       description: [
         "Upon opening the cage, Beebee quickly escapes. His first course of action is to fly at your face, pecking out your eyes.",
