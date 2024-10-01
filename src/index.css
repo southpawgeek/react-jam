@@ -60,7 +60,8 @@ hr {
 }
 
 #tasks ul {
-  height: 15.5rem;
+  height: 16.5rem;
+  text-transform: none;
 }
 
 #tasks li, #actions ul {

@@ -6,11 +6,11 @@ export const GameProvider = ({ children }) => {
   const rooms = {
     start: {
       key: "start",
-      name: "In The Beginning",
+      name: "Storage Room",
       image: "beginning.png",
       exits: { a2: "foyer" },
       description: [
-        "You don't remember how you got here. The room is tiny, with only one <br/>discernible exit.",
+        "You don't remember how you got here, but you are in a storage room that is not storing very much. The room has only one discernible exit. A dirty chair sits by the door.",
       ],
       actions: {
         a1: {
@@ -36,7 +36,7 @@ export const GameProvider = ({ children }) => {
       image: "foyer.png",
       exits: { a1: "birdroom", c2: "start", b2: "nowhere", a3: "deathVortex" },
       description: [
-        "There's a giant hole in the center of this room. Blue energy lazily swirls out of it. The energy is being siphoned out into what appears to be deep space. A window to the left looks like you could crawk through it.",
+        "The foyer must have been lovely in its prime. Upstairs, a repetitive chirping sound comes from the visible door, and the hallway continues eastward. On the main floor, the door before you leads to the kitchen. To the east, there is a dining room entrance.",
       ],
       actions: {
         a1: {
@@ -71,7 +71,7 @@ export const GameProvider = ({ children }) => {
       image: "deathBeebee.png",
       exits: { b2: "start" },
       description: [
-        "Upon opening the cage, Beebee quickly escapes. His first course of action is to fly at your face, pecking out your eyes.",
+        "Upon opening the cage, Beebee quickly escapes. You imagine the bird's instinct would be to fly out the window and enjoy his freedom. However, his first course of action is to launch himself at your face, pecking out your eyes.",
       ],
       actions: {},
     },
@@ -124,13 +124,45 @@ export const GameProvider = ({ children }) => {
 
   const tasks = [
     {
+      key: "deathChair",
+      name: "Have a Seat"
+    },
+    {
       key: "deathBeebee",
       name: "Meet Beebee",
     },
     {
-      key: "deathVortex",
-      name: "Explore Space",
+      key: "deathFood",
+      name: "Relentless Snacker",
     },
+    {
+      key: "deathBulb",
+      name: "Shed Some Light"
+    },
+    {
+      key: "deathCrevice",
+      name: "Slap a Cap"
+    },
+    {
+      key: "deathBook",
+      name: "Well Read"
+    },
+    {
+      key: "deathRitual",
+      name: "Ashes to Ashes"
+    },
+    {
+      key: "deathBathtub",
+      name: "Squeaky Clean"
+    },
+    {
+      key: "deathMirror",
+      name: "Chill Out"
+    },
+    {
+      key: "deathBed",
+      name: "Away From the Light"
+    }
   ]
 
   const [visitedRooms, setVisitedRooms] = useState(["start"])
