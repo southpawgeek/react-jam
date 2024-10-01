@@ -89,8 +89,16 @@ hr {
 }
 
 #actions-grid {
+  border-collapse: collapse;
   width: 100%;
   height: 100%;
+}
+#actions-grid td {
+  border: 1px solid rgba(255,0,255,0);
+  font-size: 2rem;
+  color: white;
+  opacity: 0%;
+  text-align: center;
 }
 
 #move-grid {
@@ -114,6 +122,30 @@ td.exit button {
   background: var(--ui-background);
   vertical-align: middle;
   border: 6px double var(--ui-border);
+}
+
+[data-exit]:hover:after {
+  opacity: 1;
+  transition: all 0.1s ease 0.5s;
+  visibility: visible;
+}
+[data-exit]:after {
+  content: attr(data-exit);
+  background-color: var(--ui-background);
+  font-size: 150%;
+  position: absolute;
+  top: 9px;
+  left: 40px;
+  padding: 1px 5px 2px 5px;
+  white-space: nowrap;
+  box-shadow: 1px 1px 3px #222222;
+  opacity: 0;
+  border: 1px solid var(--ui-border);
+  z-index: 99999;
+  visibility: hidden;
+}
+[data-exit] {
+  position: relative;
 }
 
 td.no-exit {

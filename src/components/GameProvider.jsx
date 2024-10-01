@@ -3,7 +3,95 @@ import { createContext, useContext, useState } from "react"
 const GameContext = createContext()
 
 export const GameProvider = ({ children }) => {
+  const actionSets = {
+    startDoorway: {
+      hit: {
+        description: [
+          "You attempt to hit the emptiness in the doorway. You stumble forward awkwardly.",
+        ],
+      },
+      use: {
+        description: [
+          "You ponder the infinite ways in which you could use an open doorway.",
+        ],
+      },
+    },
+    startChair: {
+      examine: {
+        description: [
+          "The chair looks reasonably comfortable, but it's also glistening in a rather unsettling way.",
+        ]
+      },
+      hit: {
+        description: ["You slap the chair, and find that it is slimy. Gross!"],
+      },
+      use: {
+        nextRoom: "deathChair",
+      },
+    },
+    birdRoomCage: {
+      examine: { description: [
+        "A small sparrow furiously hops around the cage. A small plaque on the cage reads 'Beebee'.",
+      ], },
+      use: { nextRoom: "deathBeebee" },
+      hit: { description: ["You rattle the cage, angering the tiny bird inside."] },
+    },
+    birdRoomCurtains: {
+      examine: { description: ["The drapes are an unappealing green color, and full of dust."], },
+      use: {description: [
+        "You'd close them, but you're concerned the drape runners would not be silent.",
+      ],
+      },
+      hit: {description: [
+        "You give the drapes a good slap, releasing a cloud of dust.",
+      ],}
+    },
+    birdRoomWindow: {
+      examine: { description: [
+        "The window is open, but the light is blinding. You can't see what's outside.",
+      ], },
+      use: { description: [
+        "You briefly consider crawling out the window, but your gut tells you this would be a very bad idea.",
+      ], },
+      hit: {description: ["You try to extend your hand through the open window. An unseen force pushes your hand back in."]}
+    },
+    atticWindow: {
+      examine: {description: ["The light outside is blinding, making it difficult to see anything."]}
+    },
+    atticRitual: {
+      examine: {description: ["A strange circle is drawn on the floor, with a candle and a few other items strewn around. It looks like some kind of ritual."]},
+      use: { description: ["You're not really sure how to complete the ritual, or what it is for."] },
+      hit: {
+        nextRoom: "deathRitual"
+      }
+    },
+    bathroomMirror: {
+      examine: { description: ["The mirror is painfully cold to the touch."] },
+      use: { description: ["Despite everything, it's still you."] },
+      hit: {nextRoom: "deathMirror"}
+    },
+    bathroomToilet: {
+      examine: { description: ["Yup. That's a toilet. It's relatively clean, at least."] },
+      use: {description: ["You feel like you're being watched, so you decide not to use it."]}
+    },
+    bathroomTub: {
+      examine: {description: ["The tub hasn't been used in a long time. You wonder if the hot water still works."]},
+      use: {nextRoom: "deathBathtub"}
+    },
+    bathroomSink: {
+      use: {description: ["You turn the faucet, but hear a strange buzzing sound. Nothing comes out."]}
+    },
+    diningRoomFood: {
+      examine: { description: ["The pie looks and smells great. But why is it here?"] },
+      use: {nextRoom: "deathFood"}
+    },
+    diningRoomTable: {
+      hit: {description: ["You slam your fits down on the table, to little effect."]}
+    }
+  }
+
   const rooms = {
+    // rooms
     start: {
       key: "start",
       name: "Storage Room",
@@ -13,110 +101,340 @@ export const GameProvider = ({ children }) => {
         "You don't remember how you got here, but you are in a storage room that is not storing very much. The room has only one discernible exit. A dirty chair sits by the door.",
       ],
       actions: {
-        a1: {
-          examine: {
-            description: ["There isn't much to look at here."],
-          },
-          hit: {
-            description: [
-              "You attempt to hit the emptiness in the doorway. You stumble forward <br/>awkwardly.",
-            ],
-          },
-          use: {
-            description: [
-              "You ponder the infinite ways in which you could use an open doorway.",
-            ],
-          },
-        },
+        // doorway
+        c5: actionSets.startDoorway,
+        c6: actionSets.startDoorway,
+        d5: actionSets.startDoorway,
+        d6: actionSets.startDoorway,
+        e5: actionSets.startDoorway,
+        e6: actionSets.startDoorway,
+        // chair
+        e7: actionSets.startChair,
+        e8: actionSets.startChair,
+        f7: actionSets.startChair,
+        f8: actionSets.startChair,
+        g7: actionSets.startChair,
+        g8: actionSets.startChair,
       },
     },
     foyer: {
       key: "foyer",
-      name: "The Vortex",
+      name: "Decrepit Foyer",
       image: "foyer.png",
-      exits: { a1: "birdroom", c2: "start", b2: "nowhere", a3: "deathVortex" },
-      description: [
-        "The foyer must have been lovely in its prime. Upstairs, a repetitive chirping sound comes from the visible door, and the hallway continues eastward. On the main floor, the door before you leads to the kitchen. To the east, there is a dining room entrance.",
-      ],
-      actions: {
-        a1: {
-          examine: {
-            description: [
-              "The portal beckons to you. The giant vacuum hole sucking everything into space <br />also looks interesting, but you question its safety.",
-            ],
-          },
-        },
+      exits: {
+        a1: "birdRoom",
+        a3: "upstairs",
+        b2: "kitchen",
+        b3: "diningRoom",
+        c2: "start",
       },
+      description: [
+        "Despite being a foyer, there does not seem to be any way to exit the house. Upstairs, a repetitive chirping sound comes from the visible door, and the hallway continues eastward. On the main floor, the door before you leads to the kitchen. To the east, there is a dining room entrance.",
+      ],
     },
-    birdroom: {
-      key: "birdroom",
+    birdRoom: {
+      key: "birdRoom",
       name: "Beebee's Room",
       image: "birdcage.png",
       description: [
-        "The cozy room has a bird cage by the window. There's a chair next to the cage.",
+        "This room has a bright, open window with a small birdcage on a stand. Inside the cage is the source of the chirping. The bird cautiously watches you.",
       ],
       exits: { c3: "foyer" },
       actions: {
-        a1: {
-          use: { nextRoom: "deathBeebee" },
-          examine: {
-            description: ["A small sparrow furiously hops around the cage."],
-          },
-        },
+        // cage
+        d4: actionSets.birdRoomCage,
+        d5: actionSets.birdRoomCage,
+        e4: actionSets.birdRoomCage,
+        e5: actionSets.birdRoomCage,
+        // window
+        b3: actionSets.birdRoomWindow,
+        b4: actionSets.birdRoomWindow,
+        b5: actionSets.birdRoomWindow,
+        c3: actionSets.birdRoomWindow,
+        c4: actionSets.birdRoomWindow,
+        c5: actionSets.birdRoomWindow,
+        d3: actionSets.birdRoomWindow,
+        // curtains
+        a1: actionSets.birdRoomCurtains,
+        a2: actionSets.birdRoomCurtains,
+        b1: actionSets.birdRoomCurtains,
+        b2: actionSets.birdRoomCurtains,
+        c1: actionSets.birdRoomCurtains,
+        c2: actionSets.birdRoomCurtains,
+        d1: actionSets.birdRoomCurtains,
+        d2: actionSets.birdRoomCurtains,
+        e1: actionSets.birdRoomCurtains,
+        e2: actionSets.birdRoomCurtains,
+        f1: actionSets.birdRoomCurtains,
+        f2: actionSets.birdRoomCurtains,
+        g1: actionSets.birdRoomCurtains,
+        g2: actionSets.birdRoomCurtains,
+        h1: actionSets.birdRoomCurtains,
+        h2: actionSets.birdRoomCurtains,
+        a6: actionSets.birdRoomCurtains,
+        a7: actionSets.birdRoomCurtains,
+        b6: actionSets.birdRoomCurtains,
+        b7: actionSets.birdRoomCurtains,
+        c6: actionSets.birdRoomCurtains,
+        c7: actionSets.birdRoomCurtains,
+        d6: actionSets.birdRoomCurtains,
+        d7: actionSets.birdRoomCurtains,
+        e6: actionSets.birdRoomCurtains,
+        e7: actionSets.birdRoomCurtains,
+        f6: actionSets.birdRoomCurtains,
+        f7: actionSets.birdRoomCurtains,
+        g6: actionSets.birdRoomCurtains,
+        g7: actionSets.birdRoomCurtains,
+        h6: actionSets.birdRoomCurtains,
+        h7: actionSets.birdRoomCurtains,
       },
+    },
+    upstairs: {
+      key: "upstairs",
+      name: "Upstairs Hallway",
+      image: "upstairs.png",
+      description: [
+        "The hallway has several open doorways, including a bedroom and bathroom entrance. The room at the end of the hall is full of books. Off to the side, a ladder to the attic is visible.",
+      ],
+      exits: {
+        a2: "library",
+        a3: "attic",
+        b1: "bathroom",
+        b3: "bedroom",
+        c1: "foyer",
+      },
+    },
+    kitchen: {
+      key: "kitchen",
+      name: "Disused Kitchen",
+      image: "kitchen.png",
+      description: [
+        "The kitchen doesn't look like it has been used for a long time. There's an opening to the basement, and the dining room is just south of here.",
+      ],
+      exits: {
+        b1: "foyer",
+        b3: "basement",
+        c2: "diningRoom",
+      },
+    },
+    diningRoom: {
+      key: "diningRoom",
+      name: "Dining Room",
+      image: "diningRoom.png",
+      description: [
+        "Strangely, the dining room is in a much better condition than the rest of the house. The table is set for dessert, with a lovely cherry pie as the centerpiece. One slice of pie sits on a white dish.",
+      ],
+      exits: {
+        a2: "kitchen",
+        b1: "foyer",
+      },
+    },
+    basement: {
+      key: "basement",
+      name: "Musty Basement",
+      image: "basement.png",
+      description: [
+        "The basement is dark, and smells a bit moldy. Despite the lack of light, you can make out a strange, glowing crevice. A bare bulb with a long chain hangs in the center of the room.",
+      ],
+      exits: {
+        a1: "kitchen",
+        b3: "crevice",
+      },
+    },
+    crevice: {
+      key: "crevice",
+      name: "Eroded Crevice",
+      image: "crevice.png",
+      description: [
+        "The tiny crevice contains all kinds of oddly bioluminescent fungus and strange vines.",
+      ],
+      exits: {
+        b1: "basement",
+      },
+    },
+    library: {
+      key: "library",
+      name: "Overstuffed Library",
+      image: "library.png",
+      description: [
+        "There are so many books, you aren't sure what to look at first. Some are in shelves, while there are quite a few large stacks as well.",
+      ],
+      exits: {
+        c2: "upstairs",
+      },
+    },
+    attic: {
+      key: "attic",
+      name: "Cramped Attic",
+      image: "attic.png",
+      description: [
+        "The sparse attic is not large enough to stand up in, but has a tiny window. There are some strange looking objects in the corner.",
+      ],
+      exits: {
+        c1: "upstairs",
+      },
+      actions: {
+        e5: actionSets.atticWindow,
+        e6: actionSets.atticWindow,
+        f8: actionSets.atticRitual,
+        f9: actionSets.atticRitual,
+        g8: actionSets.atticRitual,
+        g9: actionSets.atticRitual,
+        h8: actionSets.atticRitual,
+        h9: actionSets.atticRitual,
+      }
+    },
+    bathroom: {
+      key: "bathroom",
+      name: "Bathroom",
+      image: "bathroom.png",
+      description: [
+        "The bathroom is unremarkable. There's a bathtub on one side, toilet on the other, and the mirror and sink are in the middle.",
+      ],
+      exits: {
+        b3: "upstairs",
+      },
+      actions: {
+        // mirror
+        b4: actionSets.bathroomMirror,
+        b5: actionSets.bathroomMirror,
+        b6: actionSets.bathroomMirror,
+        c4: actionSets.bathroomMirror,
+        c5: actionSets.bathroomMirror,
+        c6: actionSets.bathroomMirror,
+        // sink
+        d4: actionSets.bathroomSink,
+        d5: actionSets.bathroomSink,
+        d6: actionSets.bathroomSink,
+        e5: actionSets.bathroomSink,
+        // toilet
+        e7: actionSets.bathroomToilet,
+        f7: actionSets.bathroomToilet,
+        f8: actionSets.bathroomToilet,
+        // tub
+        e3: actionSets.bathroomTub,
+        f3: actionSets.bathroomTub,
+        f4: actionSets.bathroomTub,
+        g2: actionSets.bathroomTub,
+        g3: actionSets.bathroomTub,
+        h2: actionSets.bathroomTub,
+        h3: actionSets.bathroomTub,
+        i2: actionSets.bathroomTub,
+      }
+    },
+    bedroom: {
+      key: "bedroom",
+      name: "Bedroom",
+      image: "bedroom.png",
+      description: [
+        "The bedroom looks fairly comfortable, despite having been uninhabited for quite some time. The bed is still perfectly made.",
+      ],
+      exits: {
+        b1: "upstairs",
+      },
+    },
+    // deaths/tasks
+    deathChair: {
+      key: "deathChair",
+      name: "Have a Seat",
+      image: "deathChair.png",
+      exits: { b2: "start" },
+      description: [
+        "As soon as you sit in the chair, disgusting pink tentacles come out of nowhere, enveloping your arms and legs. The acid completely dissolves your flesh and bones.",
+      ],
     },
     deathBeebee: {
       key: "deathBeebee",
-      name: "Game Over",
+      name: "Meet Beebee",
       image: "deathBeebee.png",
-      exits: { b2: "start" },
+      exits: { b2: "birdRoom" },
       description: [
         "Upon opening the cage, Beebee quickly escapes. You imagine the bird's instinct would be to fly out the window and enjoy his freedom. However, his first course of action is to launch himself at your face, pecking out your eyes.",
       ],
-      actions: {},
     },
-    nowhere: {
-      key: "nowhere",
-      name: "Nowhere?",
-      image: "nowhere.png",
-      exits: {
-        a1: "start",
-        a2: "start",
-        a3: "start",
-        b1: "start",
-        b2: "start",
-        b3: "start",
-        c1: "start",
-        c2: "start",
-        c3: "start",
-      },
-      actions: {},
-      description: ["all roads go to the same place"],
-    },
-    deathVortex: {
-      key: "deathVortex",
-      name: "Game Over",
-      image: "death.png",
-      exits: { b2: "start" },
+    deathFood: {
+      key: "deathFood",
+      name: "Relentless Snacker",
+      image: "deathFood.png",
+      exits: { b2: "diningRoom" },
       description: [
-        "Unfortunately, you didn't survive the cold vacuum of space.",
+        "Without questioning the wisdom of eating random, unattended food, you quickly devour the slice of pie. You begin to feel an uncomfortable rumbling. The contents of your stomach begin to expand uncontrollably, tearing you apart from the inside out.",
       ],
-      actions: {
-        a1: {
-          examine: {
-            description: [
-              "The skull stares at you through eyeless sockets. You can't help but feel like <br />you're being judged.",
-            ],
-          },
-          hit: {
-            description: [
-              "You focus all of your fury upon the weird floating skull before you. Alas, you are still dead and the skull is unharmed. But, you feel a little better now.",
-            ],
-          },
-        },
-      },
+    },
+    deathBulb: {
+      key: "deathBulb",
+      name: "Shed Some Light",
+      image: "deathBulb.png",
+      exits: { b2: "basement" },
+      description: [
+        "You try pulling the bulb chain to turn it on. As soon as you make contact with the chain, an incredible amount of electricity courses through your body. For a brief moment, you feel like Zeus himself. Ultimately, you are reduced to a charred husk.",
+      ],
+    },
+    deathCrevice: {
+      key: "deathCrevice",
+      name: "Slap a Cap",
+      image: "deathCrevice.png",
+      exits: { b2: "basement" },
+      description: [
+        "Giving in to intrusive thoughts, you slap the top of the largest mushroom. The agitated cap unfurls, revealing a hideous set of sharp teeth. Isn't nature beautiful and mysterious?",
+      ],
+    },
+    deathBook: {
+      key: "deathBook",
+      name: "Well Read",
+      image: "deathBook.png",
+      exits: { b2: "library" },
+      description: [
+        "Ignoring the laws of physics, you grab a book from the center of a stack and pull it out. An avalanche of books fully engulfs you. As your life flashes before your eyes, you bitterly recall you never enjoyed reading anyway.",
+      ],
+    },
+    deathRitual: {
+      key: "deathRitual",
+      name: "Ashes to Ashes",
+      image: "deathRitual.png",
+      exits: { b2: "attic" },
+      description: [
+        "You accidentally knock over the candle in the center of the ritual. Fire quickly travels throughout the dry, rotted wood in the attic. You are burnt to a crisp.",
+      ],
+    },
+    deathBathtub: {
+      key: "deathBathtub",
+      name: "Squeaky Clean",
+      image: "deathBathtub.png",
+      exits: { b2: "bathroom" },
+      description: [
+        "Black water sputters out of the tub spigot. Suddenly, you have the terrible realization that the water was actually a swarm of flesh-eating bugs. Your skeleton is picked clean within seconds.",
+      ],
+    },
+    deathMirror: {
+      key: "deathMirror",
+      name: "Chill Out",
+      image: "deathMirror.png",
+      exits: { b2: "bathroom" },
+      description: [
+        "Inexplicably, you ram your forehead into the mirror. Also inexplicably, behind the mirror was the virtual nothingness of space. Instantly losing consciousness, you are blissfully unaware as the cold vacuum destroys your body.",
+      ],
+    },
+    deathBed: {
+      key: "deathBed",
+      name: "Away From the Light",
+      image: "deathBed.png",
+      exits: { b2: "bedroom" },
+      description: [
+        "The bed is impossibly soft, and it doesn't take long to fall asleep. Unfortunately, you have a very realistic nightmare that you are falling. You never wake up.",
+      ],
+    },
+    // epilogue
+    epilogue: {
+      key: "epilogue",
+      name: "Quest's End",
+      image: "epilogue.png",
+      description: [
+        "This peculiar house seems to be done with you. It's almost as though it were alive and observing your actions. You have been unceremoniously ejected from the house, and begin your long trek home.",
+      ],
     },
   }
+
   const [currentRoom, setCurrentRoom] = useState(rooms.start)
   const [currentDescription, setCurrentDescription] = useState(
     rooms.start.description
@@ -125,7 +443,7 @@ export const GameProvider = ({ children }) => {
   const tasks = [
     {
       key: "deathChair",
-      name: "Have a Seat"
+      name: "Have a Seat",
     },
     {
       key: "deathBeebee",
@@ -137,32 +455,32 @@ export const GameProvider = ({ children }) => {
     },
     {
       key: "deathBulb",
-      name: "Shed Some Light"
+      name: "Shed Some Light",
     },
     {
       key: "deathCrevice",
-      name: "Slap a Cap"
+      name: "Slap a Cap",
     },
     {
       key: "deathBook",
-      name: "Well Read"
+      name: "Well Read",
     },
     {
       key: "deathRitual",
-      name: "Ashes to Ashes"
+      name: "Ashes to Ashes",
     },
     {
       key: "deathBathtub",
-      name: "Squeaky Clean"
+      name: "Squeaky Clean",
     },
     {
       key: "deathMirror",
-      name: "Chill Out"
+      name: "Chill Out",
     },
     {
       key: "deathBed",
-      name: "Away From the Light"
-    }
+      name: "Away From the Light",
+    },
   ]
 
   const [visitedRooms, setVisitedRooms] = useState(["start"])

@@ -19,14 +19,14 @@ const MoveGrid = () => {
   const Exit = ({ exitName }) => {
     const exit = rooms[exitName]
     return (
-      <td className="exit">
+      <td className="exit" data-exit={rooms[exitName]?.name || 'N/A'}>
         <button onClick={() => handleExit(exit)} />
       </td>
     )
   }
   const NoExit = () => <td className="no-exit"></td>
 
-  // 9x9 grid for now
+  // 3x3 movement grid
   const rows = [
     ["a1", "a2", "a3"],
     ["b1", "b2", "b3"],
