@@ -1,7 +1,17 @@
 import { useGameProvider } from "./GameProvider"
 
 const Actions = () => {
-  const { rooms, currentRoom, setCurrentRoom, clearVisitedRooms, setCurrentDescription, actions, currentAction, setCurrentAction, taskPercentage } = useGameProvider()
+  const {
+    rooms,
+    currentRoom,
+    setCurrentRoom,
+    clearVisitedRooms,
+    setCurrentDescription,
+    actions,
+    currentAction,
+    setCurrentAction,
+    taskPercentage,
+  } = useGameProvider()
 
   const handleSelect = (action) => {
     setCurrentAction(action)
@@ -19,28 +29,29 @@ const Actions = () => {
       setCurrentRoom(rooms.epilogue)
       setCurrentDescription(rooms.epilogue.description)
       clearVisitedRooms()
-    }
-    else {
-    setCurrentDescription(["You aren't sure how you would leave the house. Perhaps you have some unfinished business here?"])
+    } else {
+      setCurrentDescription([
+        "You aren't sure how you would leave the house. Perhaps you have some unfinished business here?",
+      ])
     }
   }
 
   const Active = ({ action }) => (
     <>
-      <span className='active-action'>{action}</span>
+      <span className="active-action">{action}</span>
       &nbsp;
       <span
-        className='active-cancel'
+        className="active-cancel"
         onClick={() => handleCancel()}
       >
-        x
+        [x]
       </span>
     </>
   )
 
   const Inactive = ({ action }) => (
     <span
-      className='inactive-action'
+      className="inactive-action"
       onClick={() => {
         handleSelect(action)
       }}
@@ -49,11 +60,17 @@ const Actions = () => {
     </span>
   )
 
-  const Leave = () => 
-    <span className={taskPercentage === 100 ? 'glow' : 'inactive-action'} onClick={() => completeGame()}>Leave?</span>
+  const Leave = () => (
+    <span
+      className={taskPercentage === 100 ? "glow" : "inactive-action"}
+      onClick={() => completeGame()}
+    >
+      Leave?
+    </span>
+  )
 
   return (
-    <div id='actions'>
+    <div id="actions">
       <h2>Actions</h2>
       <hr />
       <ul>
@@ -66,7 +83,11 @@ const Actions = () => {
             )}
           </li>
         ))}
-        {currentRoom.key !== 'epilogue' ? <li><Leave /></li> : null}
+        {currentRoom.key !== "epilogue" ? (
+          <li>
+            <Leave />
+          </li>
+        ) : null}
       </ul>
     </div>
   )
