@@ -16,7 +16,8 @@
   text-shadow: 1px 1px 0px var(--ui-highlight);
 }
 
-h1, h2 {
+h1,
+h2 {
   font-size: 2rem;
   margin: 0;
   text-align: center;
@@ -53,18 +54,20 @@ hr {
   background-color: var(--ui-background);
 }
 
-#tasks ul, #actions ul {
+#tasks ul,
+#actions ul {
   list-style-type: square;
   margin: 0;
   text-transform: capitalize;
 }
 
 #tasks ul {
-  height: 16.5rem;
+  height: 15.5rem;
   text-transform: none;
 }
 
-#tasks li, #actions ul {
+#tasks li,
+#actions ul {
   margin-left: 1rem;
 }
 
@@ -74,7 +77,9 @@ hr {
   text-decoration-thickness: 1px;
 }
 
-.inactive-action, .active-cancel, td.exit button {
+.inactive-action,
+.active-cancel,
+td.exit button {
   cursor: pointer;
 }
 
@@ -88,13 +93,36 @@ hr {
   text-transform: none;
 }
 
+.glow {
+  cursor: pointer;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 3px rgb(0, 255, 255);
+  }
+  33% {
+    text-shadow: 0 0 3px rgb(162, 255, 0);
+  }
+  67% {
+    text-shadow: 0 0 3px rgb(255, 0, 225);
+  }
+  100% {
+    text-shadow: 0 0 3px rgb(255, 255, 255);
+  }
+}
+
 #actions-grid {
   border-collapse: collapse;
   width: 100%;
   height: 100%;
 }
 #actions-grid td {
-  border: 1px solid rgba(255,0,255,0);
+  border: 1px solid rgba(255, 0, 255, 0);
   font-size: 2rem;
   color: white;
   opacity: 0%;

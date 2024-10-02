@@ -81,12 +81,15 @@ export const GameProvider = ({ children }) => {
     bathroomSink: {
       use: {description: ["You turn the faucet, but hear a strange buzzing sound. Nothing comes out."]}
     },
-    diningRoomFood: {
+    kitchenFood: {
       examine: { description: ["The pie looks and smells great. But why is it here?"] },
       use: {nextRoom: "deathFood"}
     },
-    diningRoomTable: {
-      hit: {description: ["You slam your fits down on the table, to little effect."]}
+    kitchenTable: {
+      hit: {description: ["Why hit the table when it's already down?"]}
+    },
+    basementBulb: {
+      use: {nextRoom: "deathBulb"}
     }
   }
 
@@ -96,9 +99,9 @@ export const GameProvider = ({ children }) => {
       key: "start",
       name: "Storage Room",
       image: "beginning.png",
-      exits: { a2: "foyer" },
+      exits: { a2: "foyer", c1: "basement" },
       description: [
-        "You don't remember how you got here, but you are in a storage room that is not storing very much. The room has only one discernible exit. A dirty chair sits by the door.",
+        "You don't remember how you got here, but you are in a storage room that is not storing very much. A doorway leads out into the foyer, and a hole descends into a very dark area. A dirty chair sits by the door.",
       ],
       actions: {
         // doorway
@@ -122,14 +125,12 @@ export const GameProvider = ({ children }) => {
       name: "Decrepit Foyer",
       image: "foyer.png",
       exits: {
-        a1: "birdRoom",
         a3: "upstairs",
         b2: "kitchen",
-        b3: "diningRoom",
         c2: "start",
       },
       description: [
-        "Despite being a foyer, there does not seem to be any way to exit the house. Upstairs, a repetitive chirping sound comes from the visible door, and the hallway continues eastward. On the main floor, the door before you leads to the kitchen. To the east, there is a dining room entrance.",
+        "Despite being a foyer, there does not seem to be any way to exit the house. A repetitive chirping sound drifts down from upstairs. On the main floor, the door before you leads to the kitchen.",
       ],
     },
     birdRoom: {
@@ -139,7 +140,7 @@ export const GameProvider = ({ children }) => {
       description: [
         "This room has a bright, open window with a small birdcage on a stand. Inside the cage is the source of the chirping. The bird cautiously watches you.",
       ],
-      exits: { c3: "foyer" },
+      exits: { c2: "upstairs" },
       actions: {
         // cage
         d4: actionSets.birdRoomCage,
@@ -194,13 +195,12 @@ export const GameProvider = ({ children }) => {
       name: "Upstairs Hallway",
       image: "upstairs.png",
       description: [
-        "The hallway has several open doorways, including a bedroom and bathroom entrance. The room at the end of the hall is full of books. Off to the side, a ladder to the attic is visible.",
+        "This poorly-lit hallway has several open doorways. A bathroom lies to the west, and an attic entrance to the east. The loud chirps are coming from the room at the end of the hall.",
       ],
       exits: {
-        a2: "library",
-        a3: "attic",
+        a2: "birdRoom",
         b1: "bathroom",
-        b3: "bedroom",
+        b3: "attic",
         c1: "foyer",
       },
     },
@@ -209,60 +209,74 @@ export const GameProvider = ({ children }) => {
       name: "Disused Kitchen",
       image: "kitchen.png",
       description: [
-        "The kitchen doesn't look like it has been used for a long time. There's an opening to the basement, and the dining room is just south of here.",
+        "This looks like it used to be a kitchen, but nearly everything has been removed. Against all odds, a fragrant cherry pie sits on the floor. It looks like it just came out of the nonexistent oven.",
       ],
       exits: {
-        b1: "foyer",
-        b3: "basement",
-        c2: "diningRoom",
+        c2: "foyer",
       },
+      actions: {
+        // pie
+        f5: actionSets.kitchenFood,
+        f6: actionSets.kitchenFood,
+        g5: actionSets.kitchenFood,
+        g6: actionSets.kitchenFood,
+        // table
+        e3: actionSets.kitchenTable,
+        f2: actionSets.kitchenTable,
+        f3: actionSets.kitchenTable,
+        f4: actionSets.kitchenTable,
+        g3: actionSets.kitchenTable,
+      }
     },
-    diningRoom: {
-      key: "diningRoom",
-      name: "Dining Room",
-      image: "diningRoom.png",
-      description: [
-        "Strangely, the dining room is in a much better condition than the rest of the house. The table is set for dessert, with a lovely cherry pie as the centerpiece. One slice of pie sits on a white dish.",
-      ],
-      exits: {
-        a2: "kitchen",
-        b1: "foyer",
-      },
-    },
+    // diningRoom: {
+    //   key: "diningRoom",
+    //   name: "Dining Room",
+    //   image: "diningRoom.png",
+    //   description: [
+    //     "Strangely, the dining room is in a much better condition than the rest of the house. The table is set for dessert, with a lovely cherry pie as the centerpiece. One slice of pie sits on a white dish.",
+    //   ],
+    //   exits: {
+    //     a2: "kitchen",
+    //     b1: "foyer",
+    //   },
+    // },
     basement: {
       key: "basement",
       name: "Musty Basement",
       image: "basement.png",
       description: [
-        "The basement is dark, and smells a bit moldy. Despite the lack of light, you can make out a strange, glowing crevice. A bare bulb with a long chain hangs in the center of the room.",
+        "The basement is dark, and smells a bit moldy. A bare bulb with a long chain hangs in the center of the room. Thankfully, there's a rope leading back up.",
       ],
       exits: {
-        a1: "kitchen",
-        b3: "crevice",
+        a1: "start",
+        // b3: "crevice",
       },
+      actions: {
+        e7: actionSets.basementBulb
+      }
     },
-    crevice: {
-      key: "crevice",
-      name: "Eroded Crevice",
-      image: "crevice.png",
-      description: [
-        "The tiny crevice contains all kinds of oddly bioluminescent fungus and strange vines.",
-      ],
-      exits: {
-        b1: "basement",
-      },
-    },
-    library: {
-      key: "library",
-      name: "Overstuffed Library",
-      image: "library.png",
-      description: [
-        "There are so many books, you aren't sure what to look at first. Some are in shelves, while there are quite a few large stacks as well.",
-      ],
-      exits: {
-        c2: "upstairs",
-      },
-    },
+    // crevice: {
+    //   key: "crevice",
+    //   name: "Eroded Crevice",
+    //   image: "crevice.png",
+    //   description: [
+    //     "The tiny crevice contains all kinds of oddly bioluminescent fungus and strange vines.",
+    //   ],
+    //   exits: {
+    //     b1: "basement",
+    //   },
+    // },
+    // library: {
+    //   key: "library",
+    //   name: "Overstuffed Library",
+    //   image: "library.png",
+    //   description: [
+    //     "There are so many books, you aren't sure what to look at first. Some are in shelves, while there are quite a few large stacks as well.",
+    //   ],
+    //   exits: {
+    //     c2: "upstairs",
+    //   },
+    // },
     attic: {
       key: "attic",
       name: "Cramped Attic",
@@ -322,17 +336,17 @@ export const GameProvider = ({ children }) => {
         i2: actionSets.bathroomTub,
       }
     },
-    bedroom: {
-      key: "bedroom",
-      name: "Bedroom",
-      image: "bedroom.png",
-      description: [
-        "The bedroom looks fairly comfortable, despite having been uninhabited for quite some time. The bed is still perfectly made.",
-      ],
-      exits: {
-        b1: "upstairs",
-      },
-    },
+    // bedroom: {
+    //   key: "bedroom",
+    //   name: "Bedroom",
+    //   image: "bedroom.png",
+    //   description: [
+    //     "The bedroom looks fairly comfortable, despite having been uninhabited for quite some time. The bed is still perfectly made.",
+    //   ],
+    //   exits: {
+    //     b1: "upstairs",
+    //   },
+    // },
     // deaths/tasks
     deathChair: {
       key: "deathChair",
@@ -356,9 +370,9 @@ export const GameProvider = ({ children }) => {
       key: "deathFood",
       name: "Relentless Snacker",
       image: "deathFood.png",
-      exits: { b2: "diningRoom" },
+      exits: { b2: "kitchen" },
       description: [
-        "Without questioning the wisdom of eating random, unattended food, you quickly devour the slice of pie. You begin to feel an uncomfortable rumbling. The contents of your stomach begin to expand uncontrollably, tearing you apart from the inside out.",
+        "You stuff yourself, not questioning the wisdom of eating unattended floor pie. With a mighty rumble, the contents of your stomach begin to expand uncontrollably, tearing you apart from the inside out. The pie has betrayed you. It was delicious, at least.",
       ],
     },
     deathBulb: {
@@ -429,8 +443,9 @@ export const GameProvider = ({ children }) => {
       key: "epilogue",
       name: "Quest's End",
       image: "epilogue.png",
+      exits: {a2: "start"},
       description: [
-        "This peculiar house seems to be done with you. It's almost as though it were alive and observing your actions. You have been unceremoniously ejected from the house, and begin your long trek home.",
+        "You have been unceremoniously ejected from the house, and realize you cannot remember anything that happened. You could go back, if you wanted... <br/><br/>Thank you for playing!",
       ],
     },
   }
@@ -457,14 +472,14 @@ export const GameProvider = ({ children }) => {
       key: "deathBulb",
       name: "Shed Some Light",
     },
-    {
-      key: "deathCrevice",
-      name: "Slap a Cap",
-    },
-    {
-      key: "deathBook",
-      name: "Well Read",
-    },
+    // {
+    //   key: "deathCrevice",
+    //   name: "Slap a Cap",
+    // },
+    // {
+    //   key: "deathBook",
+    //   name: "Well Read",
+    // },
     {
       key: "deathRitual",
       name: "Ashes to Ashes",
@@ -477,11 +492,12 @@ export const GameProvider = ({ children }) => {
       key: "deathMirror",
       name: "Chill Out",
     },
-    {
-      key: "deathBed",
-      name: "Away From the Light",
-    },
+    // {
+    //   key: "deathBed",
+    //   name: "Away From the Light",
+    // },
   ]
+
 
   const [visitedRooms, setVisitedRooms] = useState(["start"])
   const addVisitedRoom = (roomKey) => {
@@ -492,6 +508,10 @@ export const GameProvider = ({ children }) => {
       setVisitedRooms(updatedRooms)
     }
   }
+  const clearVisitedRooms = () => setVisitedRooms([])
+
+  const completedTasks = tasks.filter(task => visitedRooms.includes(task.key));
+  const taskPercentage = (completedTasks.length / tasks.length) * 100
 
   const [currentAction, setCurrentAction] = useState("")
   const actions = ["examine", "use", "hit"]
@@ -503,7 +523,9 @@ export const GameProvider = ({ children }) => {
         setCurrentDescription,
         currentRoom,
         setCurrentRoom,
+        clearVisitedRooms,
         tasks,
+        taskPercentage,
         visitedRooms,
         addVisitedRoom,
         actions,

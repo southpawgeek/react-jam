@@ -1,7 +1,7 @@
 import { useGameProvider } from "./GameProvider"
 
 const Actions = () => {
-  const { currentRoom, setCurrentDescription, actions, currentAction, setCurrentAction } = useGameProvider()
+  const { rooms, currentRoom, setCurrentRoom, clearVisitedRooms, setCurrentDescription, actions, currentAction, setCurrentAction, taskPercentage } = useGameProvider()
 
   const handleSelect = (action) => {
     setCurrentAction(action)
@@ -12,6 +12,17 @@ const Actions = () => {
   const handleCancel = () => {
     setCurrentAction("")
     setCurrentDescription(currentRoom.description)
+  }
+
+  const completeGame = () => {
+    if (taskPercentage === 100) {
+      setCurrentRoom(rooms.epilogue)
+      setCurrentDescription(rooms.epilogue.description)
+      clearVisitedRooms()
+    }
+    else {
+    setCurrentDescription(["You aren't sure how you would leave the house. Perhaps you have some unfinished business here?"])
+    }
   }
 
   const Active = ({ action }) => (
@@ -38,6 +49,9 @@ const Actions = () => {
     </span>
   )
 
+  const Leave = () => 
+    <span className={taskPercentage === 100 ? 'glow' : 'inactive-action'} onClick={() => completeGame()}>Leave?</span>
+
   return (
     <div id='actions'>
       <h2>Actions</h2>
@@ -52,6 +66,7 @@ const Actions = () => {
             )}
           </li>
         ))}
+        {currentRoom.key !== 'epilogue' ? <li><Leave /></li> : null}
       </ul>
     </div>
   )
