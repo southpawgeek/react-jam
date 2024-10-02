@@ -135,17 +135,35 @@ td.exit button {
 }
 
 #move-grid {
-  width: 10rem;
-  height: 10rem;
+  height: 11.25rem;
   margin: 0.25rem 0.25rem 0.5rem 0.5rem;
   float: left;
-  border: 0.25rem dashed var(--ui-border);
+  border: 0.25rem solid var(--ui-border);
   background-color: var(--ui-background);
 }
 
 #move-grid td {
-  width: 1.5rem;
+  width: 100%;
+  text-align: center;
+}
+
+#move-grid th td {
   height: 1.5rem;
+  font-size: 2rem;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+#move-grid tbody {
+  display: block;
+  border: 0.125rem dashed var(--ui-border);
+  height: 8.666rem;
+}
+
+#move-grid td {
+  width: 2.666rem;
+  height: 2.666rem;
   text-align: center;
 }
 
@@ -188,7 +206,7 @@ td.no-exit {
 #description {
   font-size: 1.5rem;
   width: 38rem;
-  height: 9.5rem;
+  height: 11.25rem;
   margin: 0.25rem 0.5rem 0.5rem 0.25rem;
   float: right;
   border: 0.25rem solid var(--ui-border);

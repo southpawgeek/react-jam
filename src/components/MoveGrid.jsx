@@ -19,7 +19,10 @@ const MoveGrid = () => {
   const Exit = ({ exitName }) => {
     const exit = rooms[exitName]
     return (
-      <td className="exit" data-exit={rooms[exitName]?.name || 'N/A'}>
+      <td
+        className="exit"
+        data-exit={rooms[exitName]?.name || "N/A"}
+      >
         <button onClick={() => handleExit(exit)} />
       </td>
     )
@@ -34,24 +37,27 @@ const MoveGrid = () => {
   ]
 
   return (
-    <table id="move-grid">
-      <tbody>
-        {rows.map((row, rowIndex) => (
-          <tr key={rowIndex}>
-            {row.map((cell) =>
-              exits?.[cell] ? (
-                <Exit
-                  key={cell}
-                  exitName={exits[cell]}
-                />
-              ) : (
-                <NoExit key={cell} />
-              )
-            )}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div id="move-grid">
+      <h2>Map</h2>
+      <table>
+        <tbody>
+          {rows.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              {row.map((cell) =>
+                exits?.[cell] ? (
+                  <Exit
+                    key={cell}
+                    exitName={exits[cell]}
+                  />
+                ) : (
+                  <NoExit key={cell} />
+                )
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }
 

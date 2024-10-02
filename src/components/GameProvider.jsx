@@ -35,6 +35,7 @@ export const GameProvider = ({ children }) => {
           "There's a hole in the floor with a rope leading downward. The rope seems fairly secure.",
         ],
       },
+      use: { nextRoom: "basement" },
     },
     birdRoomCage: {
       examine: {
@@ -85,6 +86,14 @@ export const GameProvider = ({ children }) => {
       examine: {
         description: [
           "The light outside is blinding, making it difficult to see anything.",
+        ],
+      },
+      use: {
+        description: ["The window is purely decorative, and can't be opened."],
+      },
+      hit: {
+        description: [
+          "You punch the window, but the glass is very thick. Your knuckles hurt.",
         ],
       },
     },
@@ -144,6 +153,32 @@ export const GameProvider = ({ children }) => {
     },
     basementBulb: {
       use: { nextRoom: "deathBulb" },
+      examine: {
+        description: [
+          "The bulb is only just barely illuminating, as though it were loose.",
+        ],
+      },
+      hit: { nextRoom: "deathBulb" },
+    },
+    basementRope: {
+      examine: {
+        description: ["There's enough rope for you to climb back up."],
+      },
+      use: {
+        nextRoom: "start",
+      },
+      hit: {
+        description: [
+          "You channel your inner kitten, playfully swatting at the rope.",
+        ],
+      },
+    },
+    basementHole: {
+      examine: { description: ["The hole leads back up to the storage room."] },
+      use: { description: ["Perhaps the rope would be of use?"] },
+      hit: {
+        description: ["You flail your arms upward, but can't quite reach it."],
+      },
     },
   }
 
@@ -304,14 +339,25 @@ export const GameProvider = ({ children }) => {
       name: "Musty Basement",
       image: "basement.png",
       description: [
-        "The basement is dark, and smells a bit moldy. A bare bulb with a long chain hangs in the center of the room. Thankfully, there's a rope leading back up.",
+        "The basement is dark, and smells a bit moldy. A bare bulb hangs in the center of the room. Thankfully, there's a rope leading back up.",
       ],
       exits: {
         a1: "start",
         // b3: "crevice",
       },
       actions: {
+        // bulb
         e7: actionSets.basementBulb,
+        // rope
+        c3: actionSets.basementRope,
+        d3: actionSets.basementRope,
+        d4: actionSets.basementRope,
+        e4: actionSets.basementRope,
+        f4: actionSets.basementRope,
+        // hole
+        b2: actionSets.basementHole,
+        b3: actionSets.basementHole,
+        b4: actionSets.basementHole,
       },
     },
     // crevice: {
@@ -440,7 +486,7 @@ export const GameProvider = ({ children }) => {
       image: "deathBulb.png",
       exits: { b2: "basement" },
       description: [
-        "You try pulling the bulb chain to turn it on. As soon as you make contact with the chain, an incredible amount of electricity courses through your body. For a brief moment, you feel like Zeus himself. Ultimately, you are reduced to a charred husk.",
+        "As soon as you make contact with the bulb, an incredible amount of electricity courses through your body. For a brief moment, you feel like Zeus himself. Ultimately, you are reduced to a charred husk.",
       ],
     },
     deathCrevice: {
