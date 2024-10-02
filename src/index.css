@@ -127,10 +127,10 @@ td.exit button {
   height: 100%;
 }
 #actions-grid td {
-  border: 1px solid rgba(255, 0, 255, 0);
+  border: 1px solid rgba(255, 0, 255, 0.2);
   font-size: 2rem;
   color: white;
-  opacity: 0%;
+  opacity: 20%;
   text-align: center;
 }
 

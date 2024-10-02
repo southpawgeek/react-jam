@@ -20,7 +20,7 @@ export const GameProvider = ({ children }) => {
       examine: {
         description: [
           "The chair looks reasonably comfortable, but it's also glistening in a rather unsettling way.",
-        ]
+        ],
       },
       hit: {
         description: ["You slap the chair, and find that it is slimy. Gross!"],
@@ -29,68 +29,122 @@ export const GameProvider = ({ children }) => {
         nextRoom: "deathChair",
       },
     },
+    startHole: {
+      examine: {
+        description: [
+          "There's a hole in the floor with a rope leading downward. The rope seems fairly secure.",
+        ],
+      },
+    },
     birdRoomCage: {
-      examine: { description: [
-        "A small sparrow furiously hops around the cage. A small plaque on the cage reads 'Beebee'.",
-      ], },
+      examine: {
+        description: [
+          "A small sparrow furiously hops around the cage. A small plaque on the cage reads 'Beebee'.",
+        ],
+      },
       use: { nextRoom: "deathBeebee" },
-      hit: { description: ["You rattle the cage, angering the tiny bird inside."] },
+      hit: {
+        description: ["You rattle the cage, angering the tiny bird inside."],
+      },
     },
     birdRoomCurtains: {
-      examine: { description: ["The drapes are an unappealing green color, and full of dust."], },
-      use: {description: [
-        "You'd close them, but you're concerned the drape runners would not be silent.",
-      ],
+      examine: {
+        description: [
+          "The drapes are an unappealing green color, and full of dust.",
+        ],
       },
-      hit: {description: [
-        "You give the drapes a good slap, releasing a cloud of dust.",
-      ],}
+      use: {
+        description: [
+          "You'd close them, but you're concerned the drape runners would not be silent.",
+        ],
+      },
+      hit: {
+        description: [
+          "You give the drapes a good slap, releasing a cloud of dust.",
+        ],
+      },
     },
     birdRoomWindow: {
-      examine: { description: [
-        "The window is open, but the light is blinding. You can't see what's outside.",
-      ], },
-      use: { description: [
-        "You briefly consider crawling out the window, but your gut tells you this would be a very bad idea.",
-      ], },
-      hit: {description: ["You try to extend your hand through the open window. An unseen force pushes your hand back in."]}
+      examine: {
+        description: [
+          "The window is open, but the light is blinding. You can't see what's outside.",
+        ],
+      },
+      use: {
+        description: [
+          "You briefly consider crawling out the window, but your gut tells you this would be a very bad idea.",
+        ],
+      },
+      hit: {
+        description: [
+          "You try to extend your hand through the open window. An unseen force pushes your hand back in.",
+        ],
+      },
     },
     atticWindow: {
-      examine: {description: ["The light outside is blinding, making it difficult to see anything."]}
+      examine: {
+        description: [
+          "The light outside is blinding, making it difficult to see anything.",
+        ],
+      },
     },
     atticRitual: {
-      examine: {description: ["A strange circle is drawn on the floor, with a candle and a few other items strewn around. It looks like some kind of ritual."]},
-      use: { description: ["You're not really sure how to complete the ritual, or what it is for."] },
+      examine: {
+        description: [
+          "A strange circle is drawn on the floor, with a candle and a few other items strewn around. It looks like some kind of ritual.",
+        ],
+      },
+      use: {
+        description: [
+          "You're not really sure how to complete the ritual, or what it is for.",
+        ],
+      },
       hit: {
-        nextRoom: "deathRitual"
-      }
+        nextRoom: "deathRitual",
+      },
     },
     bathroomMirror: {
       examine: { description: ["The mirror is painfully cold to the touch."] },
       use: { description: ["Despite everything, it's still you."] },
-      hit: {nextRoom: "deathMirror"}
+      hit: { nextRoom: "deathMirror" },
     },
     bathroomToilet: {
-      examine: { description: ["Yup. That's a toilet. It's relatively clean, at least."] },
-      use: {description: ["You feel like you're being watched, so you decide not to use it."]}
+      examine: {
+        description: ["Yup. That's a toilet. It's relatively clean, at least."],
+      },
+      use: {
+        description: [
+          "You feel like you're being watched, so you decide not to use it.",
+        ],
+      },
     },
     bathroomTub: {
-      examine: {description: ["The tub hasn't been used in a long time. You wonder if the hot water still works."]},
-      use: {nextRoom: "deathBathtub"}
+      examine: {
+        description: [
+          "The tub hasn't been used in a long time. You wonder if the hot water still works.",
+        ],
+      },
+      use: { nextRoom: "deathBathtub" },
     },
     bathroomSink: {
-      use: {description: ["You turn the faucet, but hear a strange buzzing sound. Nothing comes out."]}
+      use: {
+        description: [
+          "You turn the faucet, but hear a strange buzzing sound. Nothing comes out.",
+        ],
+      },
     },
     kitchenFood: {
-      examine: { description: ["The pie looks and smells great. But why is it here?"] },
-      use: {nextRoom: "deathFood"}
+      examine: {
+        description: ["The pie looks and smells great. But why is it here?"],
+      },
+      use: { nextRoom: "deathFood" },
     },
     kitchenTable: {
-      hit: {description: ["Why hit the table when it's already down?"]}
+      hit: { description: ["Why hit the table when it's already down?"] },
     },
     basementBulb: {
-      use: {nextRoom: "deathBulb"}
-    }
+      use: { nextRoom: "deathBulb" },
+    },
   }
 
   const rooms = {
@@ -118,6 +172,11 @@ export const GameProvider = ({ children }) => {
         f8: actionSets.startChair,
         g7: actionSets.startChair,
         g8: actionSets.startChair,
+        // hole
+        h3: actionSets.startHole,
+        h4: actionSets.startHole,
+        i3: actionSets.startHole,
+        i4: actionSets.startHole,
       },
     },
     foyer: {
@@ -226,7 +285,7 @@ export const GameProvider = ({ children }) => {
         f3: actionSets.kitchenTable,
         f4: actionSets.kitchenTable,
         g3: actionSets.kitchenTable,
-      }
+      },
     },
     // diningRoom: {
     //   key: "diningRoom",
@@ -252,8 +311,8 @@ export const GameProvider = ({ children }) => {
         // b3: "crevice",
       },
       actions: {
-        e7: actionSets.basementBulb
-      }
+        e7: actionSets.basementBulb,
+      },
     },
     // crevice: {
     //   key: "crevice",
@@ -296,7 +355,7 @@ export const GameProvider = ({ children }) => {
         g9: actionSets.atticRitual,
         h8: actionSets.atticRitual,
         h9: actionSets.atticRitual,
-      }
+      },
     },
     bathroom: {
       key: "bathroom",
@@ -334,7 +393,7 @@ export const GameProvider = ({ children }) => {
         h2: actionSets.bathroomTub,
         h3: actionSets.bathroomTub,
         i2: actionSets.bathroomTub,
-      }
+      },
     },
     // bedroom: {
     //   key: "bedroom",
@@ -443,7 +502,7 @@ export const GameProvider = ({ children }) => {
       key: "epilogue",
       name: "Quest's End",
       image: "epilogue.png",
-      exits: {a2: "start"},
+      exits: { a2: "start" },
       description: [
         "You have been unceremoniously ejected from the house, and realize you cannot remember anything that happened. You could go back, if you wanted... <br/><br/>Thank you for playing!",
       ],
@@ -498,7 +557,6 @@ export const GameProvider = ({ children }) => {
     // },
   ]
 
-
   const [visitedRooms, setVisitedRooms] = useState(["start"])
   const addVisitedRoom = (roomKey) => {
     const index = visitedRooms.indexOf(roomKey)
@@ -510,7 +568,7 @@ export const GameProvider = ({ children }) => {
   }
   const clearVisitedRooms = () => setVisitedRooms([])
 
-  const completedTasks = tasks.filter(task => visitedRooms.includes(task.key));
+  const completedTasks = tasks.filter((task) => visitedRooms.includes(task.key))
   const taskPercentage = (completedTasks.length / tasks.length) * 100
 
   const [currentAction, setCurrentAction] = useState("")

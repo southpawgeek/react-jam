@@ -9,7 +9,7 @@ const Description = () => {
       <p>
         <ReactTyped
           strings={currentDescription}
-          typeSpeed={20}
+          typeSpeed={1}
           showCursor={false}
         />
       </p>
