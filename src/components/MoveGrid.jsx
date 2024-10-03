@@ -1,4 +1,6 @@
 import { useGameProvider } from "./GameProvider"
+import useSound from "use-sound"
+import soundMove from "../sounds/move.wav"
 
 const MoveGrid = () => {
   const {
@@ -10,10 +12,13 @@ const MoveGrid = () => {
   } = useGameProvider()
   const exits = currentRoom.exits
 
+  const [move] = useSound(soundMove, { playbackRate: 2 })
+
   const handleExit = (exit) => {
     setCurrentRoom(exit)
     setCurrentDescription(exit.description)
     addVisitedRoom(exit.key)
+    move()
   }
 
   const Exit = ({ exitName }) => {

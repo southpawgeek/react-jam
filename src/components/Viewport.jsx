@@ -1,5 +1,9 @@
 import { css } from "@emotion/css"
 import { useGameProvider } from "./GameProvider"
+import useSound from "use-sound"
+import soundDead from "../sounds/dead.wav"
+import { useState } from "react"
+
 const Viewport = () => {
   const {
     rooms,
@@ -28,6 +32,9 @@ const Viewport = () => {
     currentCursor = "grabbing"
   }
 
+  const [playbackRate, setPlaybackRate] = useState(1.2)
+  const [dead] = useSound(soundDead, { playbackRate })
+
   const handleAction = (sector) => {
     if (actions?.[sector]?.[currentAction]?.description) {
       setCurrentDescription(actions[sector][currentAction].description)
@@ -40,6 +47,11 @@ const Viewport = () => {
       addVisitedRoom(nextRoom.key)
       setCurrentDescription(nextRoom.description)
       setCurrentAction("")
+      // if it's a death room, play the sound
+      if (nextRoom.key.includes("death")) {
+        dead()
+        setPlaybackRate(playbackRate - 0.1)
+      }
     }
   }
 

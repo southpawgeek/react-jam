@@ -1,7 +1,15 @@
 import { useState } from "react"
+import useSound from "use-sound"
+import soundBoop from "../sounds/boop.wav"
 
 const Wrapper = ({ children }) => {
-  const [welcome, showWelcome] = useState(true)
+  const [welcome, setShowWelcome] = useState(true)
+  const [boop] = useSound(soundBoop)
+
+  const acknowledge = () => {
+    boop()
+    setShowWelcome(false)
+  }
 
   return (
     <div id="wrapper">
@@ -15,7 +23,7 @@ const Wrapper = ({ children }) => {
           <br />
           <hr />
           <br />
-          <button onClick={() => showWelcome(false)}>[OK, whatever]</button>
+          <button onClick={acknowledge}>[OK, whatever]</button>
         </div>
       ) : (
         children

@@ -1,4 +1,7 @@
 import { useGameProvider } from "./GameProvider"
+import useSound from "use-sound"
+import soundBoop from "../sounds/boop.wav"
+import soundExit from "../sounds/exit.wav"
 
 const Actions = () => {
   const {
@@ -13,15 +16,21 @@ const Actions = () => {
     taskPercentage,
   } = useGameProvider()
 
+  const [boop] = useSound(soundBoop)
+  const [cancelBoop] = useSound(soundBoop, { playbackRate: 0.5 })
+  const [done] = useSound(soundExit)
+
   const handleSelect = (action) => {
     setCurrentAction(action)
     const description = `What would you like to ${action}?`
     setCurrentDescription([description])
+    boop()
   }
 
   const handleCancel = () => {
     setCurrentAction("")
     setCurrentDescription(currentRoom.description)
+    cancelBoop()
   }
 
   const completeGame = () => {
@@ -29,10 +38,12 @@ const Actions = () => {
       setCurrentRoom(rooms.epilogue)
       setCurrentDescription(rooms.epilogue.description)
       clearVisitedRooms()
+      done()
     } else {
       setCurrentDescription([
         "You aren't sure how you would leave the house. Perhaps you have some unfinished business here?",
       ])
+      cancelBoop()
     }
   }
 

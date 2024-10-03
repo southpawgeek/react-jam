@@ -5,7 +5,7 @@
 
 :root {
   font-family: pixel;
-  font-size: 20px;
+  font-size: 18px;
   background-color: var(--ui-text);
 
   --ui-border: rgb(95, 57, 0);

@@ -11,5 +11,6 @@ Currently, two official plugins are available:
 
 [Beanstalk font by MistressEllipsis](https://www.pentacom.jp/pentacom/bitfontmaker2/gallery/?id=158)
 [react-typed by ssbeefeater](https://www.npmjs.com/package/react-typed)
-[Placeholder images generated with Microsoft Designer](https://designer.microsoft.com/image-creator)
-[Placeholder images processed with Pixel It](https://giventofly.github.io/pixelit/)
+[use-sound by joshwcomeau](https://www.npmjs.com/package/use-sound)
+[SFX by ChipTone](https://sfbgames.itch.io/chiptone)
+[PyxelEdit for poorly-drawn art](https://pyxeledit.com/)
