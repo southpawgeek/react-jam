@@ -5,7 +5,7 @@
 
 :root {
   font-family: pixel;
-  font-size: 16px;
+  font-size: 20px;
   background-color: var(--ui-text);
 
   --ui-border: rgb(95, 57, 0);
@@ -35,6 +35,31 @@ hr {
   width: 50rem;
   height: 39.75rem;
   margin: auto;
+}
+
+#welcome {
+  border: 0.25rem solid var(--ui-border);
+  background-color: var(--ui-background);
+  padding: 1rem;
+  font-size: 2rem;
+  width: 30rem;
+  height: 15rem;
+  margin: 10rem auto;
+}
+
+#welcome p {
+  margin: 0;
+}
+
+#welcome button {
+  float: right;
+  font-family: pixel;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: var(--ui-text);
+  text-shadow: 1px 1px 0px var(--ui-highlight);
+  cursor: pointer;
 }
 
 #viewport {
@@ -127,10 +152,10 @@ td.exit button {
   height: 100%;
 }
 #actions-grid td {
-  border: 1px solid rgba(255, 0, 255, 0.2);
+  border: 1px solid rgba(255, 0, 255, 0);
   font-size: 2rem;
   color: white;
-  opacity: 20%;
+  opacity: 0%;
   text-align: center;
 }
 
