@@ -9,7 +9,7 @@ Currently, two official plugins are available:
 
 ---
 
-[Beanstalk font by MistressEllipsis](https://www.pentacom.jp/pentacom/bitfontmaker2/gallery/?id=158)
+[Terminal Grotesque font by Velvetyne](https://velvetyne.fr/fonts/terminal-grotesque/)
 [react-typed by ssbeefeater](https://www.npmjs.com/package/react-typed)
 [use-sound by joshwcomeau](https://www.npmjs.com/package/use-sound)
 [SFX by ChipTone](https://sfbgames.itch.io/chiptone)

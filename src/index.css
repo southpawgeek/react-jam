@@ -1,11 +1,12 @@
 @font-face {
   font-family: pixel;
-  src: url(./font/Beanstalk.ttf);
+  src: url(/font/terminal-grotesque.ttf);
 }
 
 :root {
   font-family: pixel;
   font-size: 18px;
+  line-height: 32px;
   background-color: var(--ui-text);
 
   --ui-border: rgb(95, 57, 0);
@@ -43,7 +44,6 @@ hr {
   padding: 1rem;
   font-size: 2rem;
   width: 30rem;
-  height: 15rem;
   margin: 10rem auto;
 }
 
@@ -51,8 +51,11 @@ hr {
   margin: 0;
 }
 
+#welcome-button {
+  text-align: right;
+}
+
 #welcome button {
-  float: right;
   font-family: pixel;
   font-size: 2rem;
   background: none;
@@ -111,6 +114,14 @@ td.exit button {
   cursor: pointer;
 }
 
+td.exit button:hover {
+  background-color: var(--ui-highlight);
+}
+
+.inactive-action:hover, .active-cancel:hover, #welcome button:hover {
+  color: var(--ui-border)
+}
+
 .active-action {
   cursor: default;
   text-decoration: underline;
@@ -167,6 +178,10 @@ td.exit button {
   background-color: var(--ui-background);
 }
 
+#move-grid table {
+  padding: 0 0.15rem;
+}
+
 #move-grid td {
   width: 100%;
   text-align: center;
@@ -207,7 +222,7 @@ td.exit button {
 }
 [data-exit]:after {
   content: attr(data-exit);
-  background-color: var(--ui-background);
+  background-color: var(--ui-highlight);
   font-size: 150%;
   position: absolute;
   top: 9px;
