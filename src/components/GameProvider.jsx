@@ -15,6 +15,7 @@ export const GameProvider = ({ children }) => {
           "You ponder the infinite ways in which you could use an open doorway.",
         ],
       },
+      default: { nextRoom: "foyer" },
     },
     startChair: {
       examine: {
@@ -36,6 +37,7 @@ export const GameProvider = ({ children }) => {
         ],
       },
       use: { nextRoom: "basement" },
+      default: { nextRoom: "basement" },
     },
     foyerPaintings: {
       examine: {
@@ -84,6 +86,37 @@ export const GameProvider = ({ children }) => {
         ],
       },
     },
+    foyerKitchen: {
+      examine: { description: ["The kitchen lies beyond this door."] },
+      default: { nextRoom: "kitchen" },
+    },
+    foyerStart: {
+      default: { nextRoom: "start" },
+    },
+    exitToUpstairs: {
+      default: { nextRoom: "upstairs" },
+    },
+    exitToFoyer: {
+      default: { nextRoom: "foyer" },
+    },
+    upstairsBathroom: {
+      examine: { description: ["This door leads to the bathroom."] },
+      default: { nextRoom: "bathroom" },
+    },
+    upstairsBirdRoom: {
+      examine: {
+        description: ["The chirping sound is coming from this room."],
+      },
+      default: { nextRoom: "birdRoom" },
+    },
+    upstairsAttic: {
+      examine: {
+        description: [
+          "A few steps lead to a ladder, which goes up to the attic.",
+        ],
+      },
+      default: { nextRoom: "attic" },
+    },
     birdRoomCage: {
       examine: {
         description: [
@@ -92,7 +125,9 @@ export const GameProvider = ({ children }) => {
       },
       use: { nextRoom: "deathBeebee" },
       hit: {
-        description: ["You rattle the cage, angering the tiny bird inside."],
+        description: [
+          "That wouldn't be very nice. Also, you aren't sure your fingers would survive.",
+        ],
       },
     },
     birdRoomCurtains: {
@@ -251,12 +286,18 @@ export const GameProvider = ({ children }) => {
           "You channel your inner kitten, playfully swatting at the rope.",
         ],
       },
+      default: {
+        nextRoom: "start",
+      },
     },
     basementHole: {
       examine: { description: ["The hole leads back up to the storage room."] },
       use: { description: ["Perhaps the rope would be of use?"] },
       hit: {
         description: ["You flail your arms upward, but can't quite reach it."],
+      },
+      default: {
+        nextRoom: "start",
       },
     },
   }
@@ -314,7 +355,7 @@ export const GameProvider = ({ children }) => {
         // portrait
         a4: actionSets.foyerPortrait,
         b4: actionSets.foyerPortrait,
-        // door
+        // front door
         d8: actionSets.foyerDoor,
         d9: actionSets.foyerDoor,
         e8: actionSets.foyerDoor,
@@ -324,6 +365,25 @@ export const GameProvider = ({ children }) => {
         g8: actionSets.foyerDoor,
         g9: actionSets.foyerDoor,
         h9: actionSets.foyerDoor,
+        // kitchen door
+        d5: actionSets.foyerKitchen,
+        d6: actionSets.foyerKitchen,
+        e5: actionSets.foyerKitchen,
+        e6: actionSets.foyerKitchen,
+        f5: actionSets.foyerKitchen,
+        f6: actionSets.foyerKitchen,
+        // back to start
+        i3: actionSets.foyerStart,
+        i4: actionSets.foyerStart,
+        i5: actionSets.foyerStart,
+        i6: actionSets.foyerStart,
+        i7: actionSets.foyerStart,
+        // upstairs
+        a7: actionSets.exitToUpstairs,
+        a8: actionSets.exitToUpstairs,
+        a9: actionSets.exitToUpstairs,
+        b7: actionSets.exitToUpstairs,
+        b8: actionSets.exitToUpstairs,
       },
     },
     birdRoom: {
@@ -381,6 +441,12 @@ export const GameProvider = ({ children }) => {
         g7: actionSets.birdRoomCurtains,
         h6: actionSets.birdRoomCurtains,
         h7: actionSets.birdRoomCurtains,
+        // exit to upstairs
+        i3: actionSets.exitToUpstairs,
+        i4: actionSets.exitToUpstairs,
+        i5: actionSets.exitToUpstairs,
+        i6: actionSets.exitToUpstairs,
+        i7: actionSets.exitToUpstairs,
       },
     },
     upstairs: {
@@ -395,6 +461,42 @@ export const GameProvider = ({ children }) => {
         b1: "bathroom",
         b3: "attic",
         c1: "foyer",
+      },
+      actions: {
+        // exit to foyer
+        i3: actionSets.exitToFoyer,
+        i4: actionSets.exitToFoyer,
+        i5: actionSets.exitToFoyer,
+        i6: actionSets.exitToFoyer,
+        i7: actionSets.exitToFoyer,
+        // bathroom
+        b2: actionSets.upstairsBathroom,
+        b3: actionSets.upstairsBathroom,
+        c2: actionSets.upstairsBathroom,
+        c3: actionSets.upstairsBathroom,
+        d2: actionSets.upstairsBathroom,
+        d3: actionSets.upstairsBathroom,
+        e2: actionSets.upstairsBathroom,
+        e3: actionSets.upstairsBathroom,
+        f2: actionSets.upstairsBathroom,
+        f3: actionSets.upstairsBathroom,
+        g2: actionSets.upstairsBathroom,
+        g3: actionSets.upstairsBathroom,
+        // attic
+        c7: actionSets.upstairsAttic,
+        c8: actionSets.upstairsAttic,
+        d7: actionSets.upstairsAttic,
+        d8: actionSets.upstairsAttic,
+        e7: actionSets.upstairsAttic,
+        e8: actionSets.upstairsAttic,
+        f7: actionSets.upstairsAttic,
+        f8: actionSets.upstairsAttic,
+        g7: actionSets.upstairsAttic,
+        g8: actionSets.upstairsAttic,
+        // bird room
+        c5: actionSets.upstairsBirdRoom,
+        d5: actionSets.upstairsBirdRoom,
+        e5: actionSets.upstairsBirdRoom,
       },
     },
     kitchen: {
@@ -424,6 +526,12 @@ export const GameProvider = ({ children }) => {
         b4: actionSets.kitchenUtensils,
         c3: actionSets.kitchenUtensils,
         c4: actionSets.kitchenUtensils,
+        // exit to foyer
+        i3: actionSets.exitToFoyer,
+        i4: actionSets.exitToFoyer,
+        i5: actionSets.exitToFoyer,
+        i6: actionSets.exitToFoyer,
+        i7: actionSets.exitToFoyer,
       },
     },
     // diningRoom: {
@@ -497,14 +605,22 @@ export const GameProvider = ({ children }) => {
         c1: "upstairs",
       },
       actions: {
+        // window
         e5: actionSets.atticWindow,
         e6: actionSets.atticWindow,
+        // ritual
         f8: actionSets.atticRitual,
         f9: actionSets.atticRitual,
         g8: actionSets.atticRitual,
         g9: actionSets.atticRitual,
         h8: actionSets.atticRitual,
         h9: actionSets.atticRitual,
+        // exit to upstairs
+        i3: actionSets.exitToUpstairs,
+        i4: actionSets.exitToUpstairs,
+        i5: actionSets.exitToUpstairs,
+        i6: actionSets.exitToUpstairs,
+        i7: actionSets.exitToUpstairs,
       },
     },
     bathroom: {
@@ -547,6 +663,12 @@ export const GameProvider = ({ children }) => {
         g3: actionSets.bathroomTub,
         h2: actionSets.bathroomTub,
         h3: actionSets.bathroomTub,
+        // exit to upstairs
+        i3: actionSets.exitToUpstairs,
+        i4: actionSets.exitToUpstairs,
+        i5: actionSets.exitToUpstairs,
+        i6: actionSets.exitToUpstairs,
+        i7: actionSets.exitToUpstairs,
       },
     },
     // bedroom: {
@@ -751,7 +873,7 @@ export const GameProvider = ({ children }) => {
   const completedTasks = tasks.filter((task) => visitedRooms.includes(task.key))
   const taskPercentage = (completedTasks.length / tasks.length) * 100
 
-  const [currentAction, setCurrentAction] = useState("")
+  const [currentAction, setCurrentAction] = useState("default")
   const actions = ["examine", "use", "hit"]
   return (
     <GameContext.Provider

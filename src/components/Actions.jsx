@@ -28,7 +28,7 @@ const Actions = () => {
   }
 
   const handleCancel = () => {
-    setCurrentAction("")
+    setCurrentAction("default")
     setCurrentDescription(currentRoom.description)
     cancelBoop()
   }

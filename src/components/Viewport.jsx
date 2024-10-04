@@ -2,6 +2,7 @@ import { css } from "@emotion/css"
 import { useGameProvider } from "./GameProvider"
 import useSound from "use-sound"
 import soundDead from "../sounds/dead.wav"
+import soundMove from "../sounds/move.wav"
 import { useState } from "react"
 
 const Viewport = () => {
@@ -32,13 +33,16 @@ const Viewport = () => {
     currentCursor = "grabbing"
   }
 
-  const [playbackRate, setPlaybackRate] = useState(Math.random() * (1.3 - 0.7) + 0.7)
+  const [playbackRate, setPlaybackRate] = useState(
+    Math.random() * (1.3 - 0.7) + 0.7
+  )
   const [dead] = useSound(soundDead, { playbackRate })
+  const [move] = useSound(soundMove, { playbackRate })
 
   const handleAction = (sector) => {
     if (actions?.[sector]?.[currentAction]?.description) {
       setCurrentDescription(actions[sector][currentAction].description)
-      setCurrentAction("")
+      setCurrentAction("default")
     }
 
     if (actions?.[sector]?.[currentAction]?.nextRoom) {
@@ -46,11 +50,14 @@ const Viewport = () => {
       setCurrentRoom(nextRoom)
       addVisitedRoom(nextRoom.key)
       setCurrentDescription(nextRoom.description)
-      setCurrentAction("")
+      setCurrentAction("default")
       // if it's a death room, play the sound
       if (nextRoom.key.includes("death")) {
         dead()
         // have a little fun with it :)
+        setPlaybackRate(Math.random() * (1.3 - 0.7) + 0.7)
+      } else {
+        move()
         setPlaybackRate(Math.random() * (1.3 - 0.7) + 0.7)
       }
     }
