@@ -106,6 +106,7 @@ hr {
   text-decoration: line-through;
   text-decoration-style: dashed;
   text-decoration-thickness: 1px;
+  color: rgb(129, 99, 53);
 }
 
 .inactive-action,
@@ -245,7 +246,7 @@ td.no-exit {
 
 #description {
   font-size: 1.5rem;
-  width: 38rem;
+  width: 37.75rem;
   height: 11.25rem;
   margin: 0.25rem 0.5rem 0.5rem 0.25rem;
   float: right;
