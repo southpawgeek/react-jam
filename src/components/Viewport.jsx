@@ -32,7 +32,7 @@ const Viewport = () => {
     currentCursor = "grabbing"
   }
 
-  const [playbackRate, setPlaybackRate] = useState(1.2)
+  const [playbackRate, setPlaybackRate] = useState(Math.random() * (1.3 - 0.7) + 0.7)
   const [dead] = useSound(soundDead, { playbackRate })
 
   const handleAction = (sector) => {
@@ -50,7 +50,8 @@ const Viewport = () => {
       // if it's a death room, play the sound
       if (nextRoom.key.includes("death")) {
         dead()
-        setPlaybackRate(playbackRate - 0.1)
+        // have a little fun with it :)
+        setPlaybackRate(Math.random() * (1.3 - 0.7) + 0.7)
       }
     }
   }

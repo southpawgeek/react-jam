@@ -20,10 +20,8 @@ const Wrapper = ({ children }) => {
             your parents' i386. You're sure they won't mind. The label reads
             "End Quest", and promises you "minutes of point and click fun!"
           </p>
-          <br />
           <hr />
-          <br />
-          <button onClick={acknowledge}>[OK, whatever]</button>
+          <div id="welcome-button"><button onClick={acknowledge}>[OK, whatever]</button></div>
         </div>
       ) : (
         children

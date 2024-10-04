@@ -1,6 +1,7 @@
 import { useGameProvider } from "./GameProvider"
 import useSound from "use-sound"
 import soundMove from "../sounds/move.wav"
+import { useState } from "react"
 
 const MoveGrid = () => {
   const {
@@ -12,13 +13,15 @@ const MoveGrid = () => {
   } = useGameProvider()
   const exits = currentRoom.exits
 
-  const [move] = useSound(soundMove, { playbackRate: 2 })
+  const [playbackRate, setPlaybackRate] = useState(Math.random() * (2 - 1) + 1)
+  const [move] = useSound(soundMove, { playbackRate})
 
   const handleExit = (exit) => {
     setCurrentRoom(exit)
     setCurrentDescription(exit.description)
     addVisitedRoom(exit.key)
     move()
+    setPlaybackRate(Math.random() * (2 - 1) + 1)
   }
 
   const Exit = ({ exitName }) => {
@@ -43,7 +46,7 @@ const MoveGrid = () => {
 
   return (
     <div id="move-grid">
-      <h2>Map</h2>
+      <h2>Exits</h2>
       <table>
         <tbody>
           {rows.map((row, rowIndex) => (
