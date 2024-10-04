@@ -38,19 +38,51 @@ export const GameProvider = ({ children }) => {
       use: { nextRoom: "basement" },
     },
     foyerPaintings: {
-      examine: { description: ["The smaller painting looks like it was torn up at some point. The larger one is a stylized word: STAY."] },
-      hit: { description: ["You try hitting the paintings, but find they are firmly mounted on the wall."] },
-      use: {description: ["You consider how you might use the paintings, but can't think of anything."]}
+      examine: {
+        description: [
+          "The smaller painting looks like it was torn up at some point. The larger one is a stylized word: STAY.",
+        ],
+      },
+      hit: {
+        description: [
+          "You try hitting the paintings, but find they are firmly mounted on the wall.",
+        ],
+      },
+      use: {
+        description: [
+          "You consider how you might use the paintings, but can't think of anything.",
+        ],
+      },
     },
     foyerPortrait: {
-      examine: { description: ["The portrait is one of those old-fashioned black paper silhouettes. You can feel its tiny pinprick eyes staring into your soul."] },
-      hit: {nextRoom: "deathPainting"},
-      use: {description: ["You admire the skill it must have taken to cut out this silhouette. You try to avoid eye contact, despite it just being a piece of paper."]}
+      examine: {
+        description: [
+          "The portrait is one of those old-fashioned black paper silhouettes. You can feel its tiny pinprick eyes staring into your soul.",
+        ],
+      },
+      hit: { nextRoom: "deathPainting" },
+      use: {
+        description: [
+          "You admire the skill it must have taken to cut out this silhouette. You try to avoid eye contact, despite it just being a piece of paper.",
+        ],
+      },
     },
     foyerDoor: {
-      examine: {description: ["Hapharzardly nailed into the door frame, you realize there is nothing visible beyond the boards."]},
-      use: {description: ["You make an attempt to pull the boards open as if it were a door. It was not a door."]},
-      hit: {description: ["You try kicking the boards, but they are supernaturally strong and do not budge."]}
+      examine: {
+        description: [
+          "Haphazardly nailed into the door frame, you realize there is nothing visible beyond the boards.",
+        ],
+      },
+      use: {
+        description: [
+          "You make an attempt to pull the boards open as if it were a door. It was not a door.",
+        ],
+      },
+      hit: {
+        description: [
+          "You try kicking the boards, but they are supernaturally strong and do not budge.",
+        ],
+      },
     },
     birdRoomCage: {
       examine: {
@@ -141,6 +173,9 @@ export const GameProvider = ({ children }) => {
           "You feel like you're being watched, so you decide not to use it.",
         ],
       },
+      hit: {
+        description: ["You gently pat the toilet."],
+      },
     },
     bathroomTub: {
       examine: {
@@ -151,6 +186,9 @@ export const GameProvider = ({ children }) => {
       use: { nextRoom: "deathBathtub" },
     },
     bathroomSink: {
+      examine: {
+        description: ["The sink is bone-dry."],
+      },
       use: {
         description: [
           "You turn the faucet, but hear a strange buzzing sound. Nothing comes out.",
@@ -159,20 +197,38 @@ export const GameProvider = ({ children }) => {
     },
     kitchenFood: {
       examine: {
-        description: ["The pie looks delicious, as though it were just removed from the nonexistent oven."],
+        description: [
+          "The pie looks delicious, as though it were just removed from the nonexistent oven.",
+        ],
       },
       use: { nextRoom: "deathFood" },
-      hit: {description: ["You briefly feel a compulsion to strike the pie, but decide against it."]}
+      hit: {
+        description: [
+          "You briefly feel a compulsion to strike the pie, but decide against it.",
+        ],
+      },
     },
     kitchenTable: {
       examine: { description: ["The worn table has seen better days."] },
-      use: {description: ["You're not sure how you would use the table, as its legs are broken."]},
+      use: {
+        description: [
+          "You're not sure how you would use the table, as its legs are broken.",
+        ],
+      },
       hit: { description: ["Why hit the table when it's already down?"] },
     },
     kitchenUtensils: {
-      examine: { description: ["There's a fork, spatula, and spoon mounted on the wall."] },
-      use: {description: ["You briefly consider using the fork on the pie, but decide against it. It's covered in dust."]},
-      hit: {nextRoom: "deathUtensils"}
+      examine: {
+        description: [
+          "There's a fork, spatula, and spoon mounted on the wall.",
+        ],
+      },
+      use: {
+        description: [
+          "You briefly consider using the fork on the pie, but decide against it. It's covered in dust.",
+        ],
+      },
+      hit: { nextRoom: "deathUtensils" },
     },
     basementBulb: {
       use: { nextRoom: "deathBulb" },
@@ -247,7 +303,7 @@ export const GameProvider = ({ children }) => {
         c2: "start",
       },
       description: [
-        "The foyer is rather decrepit, and the stair rails are damaged. Odd-looking pictures hang on the wall. A repetitive chirp drifts down from upstairs. On the main floor, the door before you leads to the kitchen. The entry door is boarded up.",
+        "Odd-looking pictures hang on the wall. A repetitive chirp drifts down from upstairs. On the main floor, the door before you leads to the kitchen. The entry door is boarded up.",
       ],
       actions: {
         // paintings
@@ -268,7 +324,7 @@ export const GameProvider = ({ children }) => {
         g8: actionSets.foyerDoor,
         g9: actionSets.foyerDoor,
         h9: actionSets.foyerDoor,
-      }
+      },
     },
     birdRoom: {
       key: "birdRoom",
@@ -519,7 +575,9 @@ export const GameProvider = ({ children }) => {
       name: "Staring Contest",
       image: "deathPainting.png",
       exits: { b2: "foyer" },
-      description: ["You take a swipe at the silhouette, but some unseen force stops you. The spirit inhabiting the silhouette has rendered you unable to move or look away. Your body eventually ceases to function."]
+      description: [
+        "You take a swipe at the silhouette, but some unseen force stops you. The spirit inhabiting the silhouette has rendered you unable to move or look away. Your body eventually ceases to function.",
+      ],
     },
     deathBeebee: {
       key: "deathBeebee",
@@ -544,7 +602,9 @@ export const GameProvider = ({ children }) => {
       name: "Fork in the Road",
       image: "deathUtensils.png",
       exits: { b2: "kitchen" },
-      description: ["You slap the defenseless utensils, cutting your hand. You bleed profusely, unable to stop the flow. As everything fades to black, you wonder why you are like this."]
+      description: [
+        "You slap the defenseless utensils, cutting your hand. You bleed profusely, unable to stop the flow. As everything fades to black, you wonder why you are like this.",
+      ],
     },
     deathBulb: {
       key: "deathBulb",
@@ -634,10 +694,10 @@ export const GameProvider = ({ children }) => {
     {
       key: "deathBulb",
       name: "Shed Some Light",
-    },    
+    },
     {
       key: "deathPainting",
-      name: "Staring Contest"
+      name: "Staring Contest",
     },
     {
       key: "deathFood",
@@ -645,7 +705,7 @@ export const GameProvider = ({ children }) => {
     },
     {
       key: "deathUtensils",
-      name: "Fork in the Road"
+      name: "Fork in the Road",
     },
     // {
     //   key: "deathCrevice",
@@ -658,7 +718,7 @@ export const GameProvider = ({ children }) => {
     {
       key: "deathBeebee",
       name: "Meet Beebee",
-    },    
+    },
     {
       key: "deathRitual",
       name: "Ashes to Ashes",
