@@ -37,6 +37,21 @@ export const GameProvider = ({ children }) => {
       },
       use: { nextRoom: "basement" },
     },
+    foyerPaintings: {
+      examine: { description: ["The smaller painting looks like it was torn up at some point. The larger one is a stylized word: STAY."] },
+      hit: { description: ["You try hitting the paintings, but find they are firmly mounted on the wall."] },
+      use: {description: ["You consider how you might use the paintings, but can't think of anything."]}
+    },
+    foyerPortrait: {
+      examine: { description: ["The portrait is one of those old-fashioned black paper silhouettes. You can feel its tiny pinprick eyes staring into your soul."] },
+      hit: {nextRoom: "deathPainting"},
+      use: {description: ["You admire the skill it must have taken to cut out this silhouette. You try to avoid eye contact, despite it just being a piece of paper."]}
+    },
+    foyerDoor: {
+      examine: {description: ["Hapharzardly nailed into the door frame, you realize there is nothing visible beyond the boards."]},
+      use: {description: ["You make an attempt to pull the boards open as if it were a door. It was not a door."]},
+      hit: {description: ["You try kicking the boards, but they are supernaturally strong and do not budge."]}
+    },
     birdRoomCage: {
       examine: {
         description: [
@@ -144,12 +159,20 @@ export const GameProvider = ({ children }) => {
     },
     kitchenFood: {
       examine: {
-        description: ["The pie looks and smells great. But why is it here?"],
+        description: ["The pie looks delicious, as though it were just removed from the nonexistent oven."],
       },
       use: { nextRoom: "deathFood" },
+      hit: {description: ["You briefly feel a compulsion to strike the pie, but decide against it."]}
     },
     kitchenTable: {
+      examine: { description: ["The worn table has seen better days."] },
+      use: {description: ["You're not sure how you would use the table, as its legs are broken."]},
       hit: { description: ["Why hit the table when it's already down?"] },
+    },
+    kitchenUtensils: {
+      examine: { description: ["There's a fork, spatula, and spoon mounted on the wall."] },
+      use: {description: ["You briefly consider using the fork on the pie, but decide against it. It's covered in dust."]},
+      hit: {nextRoom: "deathUtensils"}
     },
     basementBulb: {
       use: { nextRoom: "deathBulb" },
@@ -224,8 +247,28 @@ export const GameProvider = ({ children }) => {
         c2: "start",
       },
       description: [
-        "Despite being a foyer, there does not seem to be any way to exit the house. A repetitive chirping sound drifts down from upstairs. On the main floor, the door before you leads to the kitchen.",
+        "The foyer is rather decrepit, and the stair rails are damaged. Odd-looking pictures hang on the wall. A repetitive chirp drifts down from upstairs. On the main floor, the door before you leads to the kitchen. The entry door is boarded up.",
       ],
+      actions: {
+        // paintings
+        a2: actionSets.foyerPaintings,
+        b1: actionSets.foyerPaintings,
+        b2: actionSets.foyerPaintings,
+        c1: actionSets.foyerPaintings,
+        // portrait
+        a4: actionSets.foyerPortrait,
+        b4: actionSets.foyerPortrait,
+        // door
+        d8: actionSets.foyerDoor,
+        d9: actionSets.foyerDoor,
+        e8: actionSets.foyerDoor,
+        e9: actionSets.foyerDoor,
+        f8: actionSets.foyerDoor,
+        f9: actionSets.foyerDoor,
+        g8: actionSets.foyerDoor,
+        g9: actionSets.foyerDoor,
+        h9: actionSets.foyerDoor,
+      }
     },
     birdRoom: {
       key: "birdRoom",
@@ -303,7 +346,7 @@ export const GameProvider = ({ children }) => {
       name: "Disused Kitchen",
       image: "kitchen.png",
       description: [
-        "This looks like it used to be a kitchen, but nearly everything has been removed. Against all odds, a fragrant cherry pie sits on the floor. It looks like it just came out of the nonexistent oven.",
+        "This looks like it used to be a kitchen. Some utensils are still mounted on the wall, and a broken table rests on the floor. Against all odds, a fragrant cherry pie sits on the floor.",
       ],
       exits: {
         c2: "foyer",
@@ -320,6 +363,11 @@ export const GameProvider = ({ children }) => {
         f3: actionSets.kitchenTable,
         f4: actionSets.kitchenTable,
         g3: actionSets.kitchenTable,
+        // utensils
+        b3: actionSets.kitchenUtensils,
+        b4: actionSets.kitchenUtensils,
+        c3: actionSets.kitchenUtensils,
+        c4: actionSets.kitchenUtensils,
       },
     },
     // diningRoom: {
@@ -415,30 +463,34 @@ export const GameProvider = ({ children }) => {
       },
       actions: {
         // mirror
-        b4: actionSets.bathroomMirror,
+        a5: actionSets.bathroomMirror,
+        a6: actionSets.bathroomMirror,
         b5: actionSets.bathroomMirror,
         b6: actionSets.bathroomMirror,
-        c4: actionSets.bathroomMirror,
         c5: actionSets.bathroomMirror,
         c6: actionSets.bathroomMirror,
         // sink
-        d4: actionSets.bathroomSink,
         d5: actionSets.bathroomSink,
         d6: actionSets.bathroomSink,
         e5: actionSets.bathroomSink,
+        e6: actionSets.bathroomSink,
         // toilet
+        d7: actionSets.bathroomToilet,
+        d8: actionSets.bathroomToilet,
         e7: actionSets.bathroomToilet,
+        e8: actionSets.bathroomToilet,
         f7: actionSets.bathroomToilet,
         f8: actionSets.bathroomToilet,
         // tub
         e3: actionSets.bathroomTub,
+        e4: actionSets.bathroomTub,
+        f2: actionSets.bathroomTub,
         f3: actionSets.bathroomTub,
         f4: actionSets.bathroomTub,
         g2: actionSets.bathroomTub,
         g3: actionSets.bathroomTub,
         h2: actionSets.bathroomTub,
         h3: actionSets.bathroomTub,
-        i2: actionSets.bathroomTub,
       },
     },
     // bedroom: {
@@ -462,6 +514,13 @@ export const GameProvider = ({ children }) => {
         "As soon as you sit in the chair, disgusting pink tentacles come out of nowhere, enveloping your arms and legs. The acid completely dissolves your flesh and bones.",
       ],
     },
+    deathPainting: {
+      key: "deathPainting",
+      name: "Staring Contest",
+      image: "deathPainting.png",
+      exits: { b2: "foyer" },
+      description: ["You take a swipe at the silhouette, but some unseen force stops you. The spirit inhabiting the silhouette has rendered you unable to move or look away. Your body eventually ceases to function."]
+    },
     deathBeebee: {
       key: "deathBeebee",
       name: "Meet Beebee",
@@ -479,6 +538,13 @@ export const GameProvider = ({ children }) => {
       description: [
         "You stuff yourself, not questioning the wisdom of eating unattended floor pie. With a mighty rumble, the contents of your stomach begin to expand uncontrollably, tearing you apart from the inside out. The pie has betrayed you. It was delicious, at least.",
       ],
+    },
+    deathUtensils: {
+      key: "deathUtensils",
+      name: "Fork in the Road",
+      image: "deathUtensils.png",
+      exits: { b2: "kitchen" },
+      description: ["You slap the defenseless utensils, cutting your hand. You bleed profusely, unable to stop the flow. As everything fades to black, you wonder why you are like this."]
     },
     deathBulb: {
       key: "deathBulb",
@@ -566,16 +632,20 @@ export const GameProvider = ({ children }) => {
       name: "Have a Seat",
     },
     {
-      key: "deathBeebee",
-      name: "Meet Beebee",
+      key: "deathBulb",
+      name: "Shed Some Light",
+    },    
+    {
+      key: "deathPainting",
+      name: "Staring Contest"
     },
     {
       key: "deathFood",
       name: "Relentless Snacker",
     },
     {
-      key: "deathBulb",
-      name: "Shed Some Light",
+      key: "deathUtensils",
+      name: "Fork in the Road"
     },
     // {
     //   key: "deathCrevice",
@@ -585,6 +655,10 @@ export const GameProvider = ({ children }) => {
     //   key: "deathBook",
     //   name: "Well Read",
     // },
+    {
+      key: "deathBeebee",
+      name: "Meet Beebee",
+    },    
     {
       key: "deathRitual",
       name: "Ashes to Ashes",
