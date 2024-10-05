@@ -804,7 +804,7 @@ export const GameProvider = ({ children }) => {
       key: "epilogue",
       name: "Quest's End",
       image: "epilogue.png",
-      exits: { a2: "start" },
+      exits: { a2: "foyer" },
       description: [
         "You have been unceremoniously ejected from the house, and realize you cannot remember anything that happened... <br/><br/>Thank you for playing!",
       ],
