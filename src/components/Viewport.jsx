@@ -80,7 +80,7 @@ const Viewport = () => {
     <div
       id="viewport"
       className={css`
-        background: url(./images/${currentRoom?.image});
+        background: url(./images/${currentRoom?.image}?t=241005);
         background-size: cover;
         cursor: ${currentCursor};
       `}
