@@ -12,7 +12,6 @@ const Tasks = () => {
   return (
     <div id="tasks">
       <h2>Tasks</h2>
-      <hr />
       <ul>
         {tasks.map((task) => (
           <li

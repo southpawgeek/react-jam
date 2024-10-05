@@ -1,0 +1,332 @@
+@font-face {
+  font-family: pixel;
+  src: url(/font/terminal-grotesque.ttf);
+}
+
+:root {
+  font-family: pixel;
+  font-size: 16px;
+  background-color: var(--ui-text);
+
+  --ui-border: rgb(95, 57, 0);
+  --ui-background: rgb(175, 145, 100);
+  --ui-text: rgb(37, 22, 0);
+  --ui-highlight: rgb(213, 180, 131);
+  --ui-highlight2: rgb(251, 234, 207);
+
+  --app-width: 23rem;
+
+  color: var(--ui-text);
+  text-shadow: 1px 1px 0px var(--ui-highlight);
+}
+
+h1,
+h2 {
+  font-size: 1.3rem;
+  margin: 0 1rem;
+  text-align: center;
+}
+
+hr {
+  width: 50%;
+  margin: 0 auto;
+  border: 1px dashed var(--ui-border);
+}
+
+#wrapper {
+  margin: auto;
+  position: relative;
+}
+
+#welcome, #credits {
+  border: 0.25rem solid var(--ui-border);
+  background-color: var(--ui-background);
+  color: var(--ui-text);
+  text-shadow: 1px 1px 0px var(--ui-highlight);
+  padding: 1rem;
+  font-size: 2rem;
+}
+
+#welcome {
+  margin: 1rem auto;
+}
+
+#credits {
+  margin: 1rem auto;
+}
+
+#credits-modal li a {
+  color: var(--ui-border);
+}
+
+#credits p {
+  text-align: center;
+  line-height: 1rem;
+  font-size: 1rem;
+}
+
+#credits-modal {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  text-align: left;
+  line-height: 2rem;
+}
+
+#credits-modal ul {
+  font-size: 1.5rem;
+}
+
+#credits-modal li {
+  text-transform: none;
+  font-size: 1.1rem;
+}
+
+#welcome p {
+  margin: 0;
+}
+
+#welcome-button, #credits-button {
+  text-align: right;
+}
+
+#welcome button, #credits button {
+  font-family: pixel;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: var(--ui-text);
+  text-shadow: 1px 1px 0px var(--ui-highlight);
+  cursor: pointer;
+}
+
+#viewport {
+  height: var(--app-width);
+  width: var(--app-width);
+  margin: 0 auto;
+  border: 0.25rem solid var(--ui-border);
+}
+
+#sidebar {
+  font-size: 1.5rem;
+  height: 12.5rem;
+  padding: 0;
+  border: 0.25rem solid var(--ui-border);
+  border-top: none;
+  background-color: var(--ui-background);
+  margin: 0 auto;
+  width: var(--app-width);
+}
+
+#tasks ul, #credits ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+#tasks {
+  width: 15rem;
+  float: right;
+  text-align: right;
+}
+
+#tasks h2 {
+  text-align: right;
+}
+
+#tasks ul {
+  text-transform: capitalize;
+  font-size: 1rem;
+}
+
+#actions ul {
+  padding: 0;
+  margin: 0;
+  text-transform: capitalize;
+  list-style-type: none;
+  text-align: left;
+  font-size: 1.2rem;
+}
+
+#tasks li,
+#actions li {
+  margin: 0 1rem;
+  height: 1.2rem;
+}
+
+#actions {
+  display: inline-block;
+  width: 5rem;
+  margin: 0;
+  text-align: center;
+}
+
+.task-completed {
+  text-decoration: line-through;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 1px;
+  color: rgb(129, 99, 53);
+}
+
+.inactive-action,
+.active-cancel,
+td.exit button {
+  cursor: pointer;
+}
+
+td.exit button:hover {
+  background-color: var(--ui-highlight);
+}
+
+.inactive-action:hover, .active-cancel:hover, #welcome button:hover {
+  color: var(--ui-border)
+}
+
+.active-action {
+  cursor: default;
+  text-decoration: underline;
+  text-shadow: 1px 1px 0px var(--ui-highlight2);
+  font-weight: bold;
+}
+
+.active-cancel {
+  font-size: 1.2rem;
+  text-transform: none;
+}
+
+.glow {
+  cursor: pointer;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 3px rgb(0, 255, 255);
+  }
+  33% {
+    text-shadow: 0 0 3px rgb(162, 255, 0);
+  }
+  67% {
+    text-shadow: 0 0 3px rgb(255, 0, 225);
+  }
+  100% {
+    text-shadow: 0 0 3px rgb(255, 255, 255);
+  }
+}
+
+#actions-grid {
+  border-collapse: collapse;
+  width: 100%;
+  height: 100%;
+}
+#actions-grid td {
+  /* border: 1px solid rgba(255, 0, 255, 1);
+  font-size: 2rem;
+  color: white;
+  text-align: center; */
+  opacity: 0%;
+}
+
+#move-grid {
+  height: 11.25rem;
+  border: 0.25rem solid var(--ui-border);
+  background-color: var(--ui-background);
+  margin: auto;
+}
+
+#move-grid table {
+  padding: 0 0.15rem;
+}
+
+#move-grid td {
+  width: 100%;
+  text-align: center;
+}
+
+#move-grid th td {
+  height: 1.5rem;
+  font-size: 2rem;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+#move-grid tbody {
+  display: block;
+  border: 0.125rem dashed var(--ui-border);
+  height: 8.666rem;
+}
+
+#move-grid td {
+  width: 2.666rem;
+  height: 2.666rem;
+  text-align: center;
+}
+
+td.exit button {
+  width: 1.5rem;
+  height: 1.5rem;
+  background: var(--ui-background);
+  vertical-align: middle;
+  border: 6px double var(--ui-border);
+}
+
+[data-exit]:hover:after {
+  opacity: 1;
+  transition: all 0.1s ease 0.5s;
+  visibility: visible;
+}
+[data-exit]:after {
+  content: attr(data-exit);
+  background-color: var(--ui-highlight);
+  font-size: 150%;
+  position: absolute;
+  top: 9px;
+  left: 40px;
+  padding: 1px 5px 2px 5px;
+  white-space: nowrap;
+  box-shadow: 1px 1px 3px #222222;
+  opacity: 0;
+  border: 1px solid var(--ui-border);
+  z-index: 99999;
+  visibility: hidden;
+}
+[data-exit] {
+  position: relative;
+}
+
+td.no-exit {
+  border: none;
+}
+
+#description {
+  font-size: 1.2rem;
+  border: 0.25rem solid var(--ui-border);
+  border-bottom: none;
+  background-color: var(--ui-background);
+  width: var(--app-width);
+  margin: 0 auto;
+}
+
+#description p {
+  height: 7.25rem;
+  padding: 0 1rem;
+  margin: 0.25rem 0 0 0;
+}
+
+#footer {
+  color: var(--ui-highlight);
+  text-shadow: 1px 1px 1px black;
+  text-align: center;
+  line-height: 1rem;
+}
+
+#footer span {
+  cursor: pointer;
+}
+
+#footer a {
+  color: var(--ui-highlight2);
+}

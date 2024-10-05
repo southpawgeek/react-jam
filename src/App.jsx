@@ -10,9 +10,8 @@ function App() {
     <GameProvider>
       <Wrapper>
         <Viewport />
-        <Sidebar />
-        <MoveGrid />
         <Description />
+        <Sidebar />
       </Wrapper>
     </GameProvider>
   )

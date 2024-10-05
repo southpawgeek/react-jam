@@ -83,7 +83,6 @@ const Actions = () => {
   return (
     <div id="actions">
       <h2>Actions</h2>
-      <hr />
       <ul>
         {actions.map((action) => (
           <li key={action}>

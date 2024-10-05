@@ -4,8 +4,9 @@ import Actions from "./Actions"
 const Sidebar = () => {
   return (
     <div id="sidebar">
-      <Tasks />
+      <hr />
       <Actions />
+      <Tasks />
     </div>
   )
 }
