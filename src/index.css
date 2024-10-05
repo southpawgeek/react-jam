@@ -34,28 +34,64 @@ hr {
 
 #wrapper {
   width: 50rem;
-  height: 39.75rem;
   margin: auto;
+  position: relative;
+}
+
+#welcome, #credits {
+  border: 0.25rem solid var(--ui-border);
+  background-color: var(--ui-background);
+  color: var(--ui-text);
+  text-shadow: 1px 1px 0px var(--ui-highlight);
+  padding: 1rem;
+  font-size: 2rem;
 }
 
 #welcome {
-  border: 0.25rem solid var(--ui-border);
-  background-color: var(--ui-background);
-  padding: 1rem;
-  font-size: 2rem;
-  width: 30rem;
-  margin: 10rem auto;
+  margin: 10rem auto 1rem;
+}
+
+#credits {
+  width: 25rem;
+  margin: 1rem auto;
+}
+
+#credits-modal li a {
+  color: var(--ui-border);
+}
+
+#credits p {
+  text-align: center;
+  line-height: 1rem;
+  font-size: 1rem;
+}
+
+#credits-modal {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  text-align: left;
+  line-height: 2rem;
+}
+
+#credits-modal ul {
+  font-size: 1.5rem;
+}
+
+#credits-modal li {
+  text-transform: none;
+  font-size: 1.1rem;
 }
 
 #welcome p {
   margin: 0;
 }
 
-#welcome-button {
+#welcome-button, #credits-button {
   text-align: right;
 }
 
-#welcome button {
+#welcome button, #credits button {
   font-family: pixel;
   font-size: 2rem;
   background: none;
@@ -85,7 +121,7 @@ hr {
 }
 
 #tasks ul,
-#actions ul {
+#actions ul, #credits ul {
   list-style-type: square;
   margin: 0;
   text-transform: capitalize;
@@ -164,11 +200,11 @@ td.exit button:hover {
   height: 100%;
 }
 #actions-grid td {
-  border: 1px solid rgba(255, 0, 255, 0);
+  /* border: 1px solid rgba(255, 0, 255, 1);
   font-size: 2rem;
   color: white;
+  text-align: center; */
   opacity: 0%;
-  text-align: center;
 }
 
 #move-grid {
@@ -257,4 +293,19 @@ td.no-exit {
 #description p {
   padding: 0 1rem;
   margin: 0.25rem 0;
+}
+
+#footer {
+  color: var(--ui-highlight);
+  text-shadow: 1px 1px 1px black;
+  text-align: center;
+  line-height: 1rem;
+}
+
+#footer span {
+  cursor: pointer;
+}
+
+#footer a {
+  color: var(--ui-highlight2);
 }
