@@ -300,6 +300,14 @@ export const GameProvider = ({ children }) => {
         nextRoom: "start",
       },
     },
+    epilogueBeebee: {
+      examine: {description: ["A tiny sparrow is flying away from the house, leaving a shimmering trail behind him. You feel an overwhelming sense of peace, but also a tangible sadness."]}
+    },
+    epilogueHouse: {
+      examine: { description: ["From a distance, the house seems more lonely than threatening. It looks like you could figure out a way back in, if you really wanted."] },
+      use: {description: ["You wonder if the house is within your budget. Definitely a fixer-upper."]},
+      hit: {description: ["You walk to the boarded-up entryway, and attempt to punch the house in its face."]}
+    }
   }
 
   const rooms = {
@@ -798,8 +806,21 @@ export const GameProvider = ({ children }) => {
       image: "epilogue.png",
       exits: { a2: "start" },
       description: [
-        "You have been unceremoniously ejected from the house, and realize you cannot remember anything that happened. You could go back, if you wanted... <br/><br/>Thank you for playing!",
+        "You have been unceremoniously ejected from the house, and realize you cannot remember anything that happened... <br/><br/>Thank you for playing!",
       ],
+      actions: {
+        // house
+        b5: actionSets.epilogueHouse,
+        c4: actionSets.epilogueHouse,
+        c5: actionSets.epilogueHouse,
+        c6: actionSets.epilogueHouse,
+        d4: actionSets.epilogueHouse,
+        d5: actionSets.epilogueHouse,
+        d6: actionSets.epilogueHouse,
+        // beebee
+        b7: actionSets.epilogueBeebee,
+        b8: actionSets.epilogueBeebee
+      }
     },
   }
 
@@ -838,10 +859,6 @@ export const GameProvider = ({ children }) => {
     //   name: "Well Read",
     // },
     {
-      key: "deathBeebee",
-      name: "Meet Beebee",
-    },
-    {
       key: "deathRitual",
       name: "Ashes to Ashes",
     },
@@ -857,6 +874,10 @@ export const GameProvider = ({ children }) => {
     //   key: "deathBed",
     //   name: "Away From the Light",
     // },
+    {
+      key: "deathBeebee",
+      name: "Meet Beebee",
+    },
   ]
 
   const [visitedRooms, setVisitedRooms] = useState(["start"])
