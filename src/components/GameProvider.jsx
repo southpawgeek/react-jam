@@ -1,5 +1,10 @@
 import { createContext, useContext, useState } from "react"
 import data from "../data"
+import useSound from "use-sound"
+import soundBoop from "../sounds/boop.wav"
+import soundExit from "../sounds/exit.wav"
+import soundMove from "../sounds/move.wav"
+import soundDead from "../sounds/dead.wav"
 
 const GameContext = createContext()
 
@@ -27,6 +32,49 @@ export const GameProvider = ({ children }) => {
 
   const [currentAction, setCurrentAction] = useState("default")
 
+  // sounds
+  const [playbackRate, setPlaybackRate] = useState(Math.random() * (2 - 1) + 1)
+  const [boop] = useSound(soundBoop)
+  const [cancelBoop] = useSound(soundBoop, { playbackRate: 0.5 })
+  const [done] = useSound(soundExit)
+  const [move] = useSound(soundMove, { playbackRate })
+  const [dead] = useSound(soundDead, { playbackRate })
+
+  // actions
+  const handleSelectAction = (action) => {
+    setCurrentAction(action)
+    const description = `What would you like to ${action}?`
+    setCurrentDescription([description])
+    boop()
+  }
+  const handleCancelAction = () => {
+    setCurrentAction("default")
+    setCurrentDescription(currentRoom.description)
+    cancelBoop()
+  }
+  const handleLeaveAction = () => {
+    if (taskPercentage === 100) {
+      setCurrentRoom(rooms.epilogue)
+      setCurrentDescription(rooms.epilogue.description)
+      clearVisitedRooms()
+      done()
+    } else {
+      setCurrentDescription([
+        "You aren't sure how you would leave the house. Perhaps you have some unfinished business here?",
+      ])
+      cancelBoop()
+    }
+  }
+  // movement
+  const handleExit = (exit) => {
+    setCurrentRoom(exit)
+    setCurrentDescription(exit.description)
+    addVisitedRoom(exit.key)
+    move()
+    setPlaybackRate(Math.random() * (2 - 1) + 1)
+  }
+  // viewport
+
   return (
     <GameContext.Provider
       value={{
@@ -43,6 +91,10 @@ export const GameProvider = ({ children }) => {
         actions,
         currentAction,
         setCurrentAction,
+        handleSelectAction,
+        handleCancelAction,
+        handleLeaveAction,
+        handleExit,
       }}
     >
       {children}

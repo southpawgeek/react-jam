@@ -1,28 +1,8 @@
 import { useGameProvider } from "./GameProvider"
-import useSound from "use-sound"
-import soundMove from "../sounds/move.wav"
-import { useState } from "react"
 
 const MoveGrid = () => {
-  const {
-    rooms,
-    currentRoom,
-    setCurrentRoom,
-    setCurrentDescription,
-    addVisitedRoom,
-  } = useGameProvider()
+  const { rooms, currentRoom, handleExit } = useGameProvider()
   const exits = currentRoom.exits
-
-  const [playbackRate, setPlaybackRate] = useState(Math.random() * (2 - 1) + 1)
-  const [move] = useSound(soundMove, { playbackRate})
-
-  const handleExit = (exit) => {
-    setCurrentRoom(exit)
-    setCurrentDescription(exit.description)
-    addVisitedRoom(exit.key)
-    move()
-    setPlaybackRate(Math.random() * (2 - 1) + 1)
-  }
 
   const Exit = ({ exitName }) => {
     const exit = rooms[exitName]
