@@ -74,7 +74,30 @@ export const GameProvider = ({ children }) => {
     setPlaybackRate(Math.random() * (2 - 1) + 1)
   }
   // viewport
+  const handleActionClick = (sector) => {
+    const actions = currentRoom.actions
+    if (actions?.[sector]?.[currentAction]?.description) {
+      setCurrentDescription(actions[sector][currentAction].description)
+      setCurrentAction("default")
+    }
 
+    if (actions?.[sector]?.[currentAction]?.nextRoom) {
+      const nextRoom = rooms[actions[sector][currentAction].nextRoom]
+      setCurrentRoom(nextRoom)
+      addVisitedRoom(nextRoom.key)
+      setCurrentDescription(nextRoom.description)
+      setCurrentAction("default")
+      // if it's a death room, play the sound
+      if (nextRoom.key.includes("death")) {
+        dead()
+        // have a little fun with it :)
+        setPlaybackRate(Math.random() * (1.3 - 0.7) + 0.7)
+      } else {
+        move()
+        setPlaybackRate(Math.random() * (1.3 - 0.7) + 0.7)
+      }
+    }
+  }
   return (
     <GameContext.Provider
       value={{
@@ -95,6 +118,7 @@ export const GameProvider = ({ children }) => {
         handleCancelAction,
         handleLeaveAction,
         handleExit,
+        handleActionClick,
       }}
     >
       {children}

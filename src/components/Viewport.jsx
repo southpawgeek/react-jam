@@ -1,22 +1,8 @@
 import { css } from "@emotion/css"
 import { useGameProvider } from "./GameProvider"
-import useSound from "use-sound"
-import soundDead from "../sounds/dead.wav"
-import soundMove from "../sounds/move.wav"
-import { useState } from "react"
 
 const Viewport = () => {
-  const {
-    rooms,
-    currentRoom,
-    setCurrentRoom,
-    addVisitedRoom,
-    currentAction,
-    setCurrentAction,
-    setCurrentDescription,
-  } = useGameProvider()
-
-  const actions = currentRoom.actions
+  const { currentRoom, currentAction, handleActionClick } = useGameProvider()
 
   let currentCursor = "default"
 
@@ -31,36 +17,6 @@ const Viewport = () => {
   }
   if (currentAction === "hit") {
     currentCursor = "grabbing"
-  }
-
-  const [playbackRate, setPlaybackRate] = useState(
-    Math.random() * (1.3 - 0.7) + 0.7
-  )
-  const [dead] = useSound(soundDead, { playbackRate })
-  const [move] = useSound(soundMove, { playbackRate })
-
-  const handleAction = (sector) => {
-    if (actions?.[sector]?.[currentAction]?.description) {
-      setCurrentDescription(actions[sector][currentAction].description)
-      setCurrentAction("default")
-    }
-
-    if (actions?.[sector]?.[currentAction]?.nextRoom) {
-      const nextRoom = rooms[actions[sector][currentAction].nextRoom]
-      setCurrentRoom(nextRoom)
-      addVisitedRoom(nextRoom.key)
-      setCurrentDescription(nextRoom.description)
-      setCurrentAction("default")
-      // if it's a death room, play the sound
-      if (nextRoom.key.includes("death")) {
-        dead()
-        // have a little fun with it :)
-        setPlaybackRate(Math.random() * (1.3 - 0.7) + 0.7)
-      } else {
-        move()
-        setPlaybackRate(Math.random() * (1.3 - 0.7) + 0.7)
-      }
-    }
   }
 
   // 9x9 action grid
@@ -92,7 +48,7 @@ const Viewport = () => {
               {row.map((cell) => (
                 <td
                   key={cell}
-                  onClick={() => handleAction(cell)}
+                  onClick={() => handleActionClick(cell)}
                 >
                   {cell}
                 </td>
