@@ -1,3 +1,11 @@
+// actions that will show up in the actions list
+// do not add default here
+// also, "leave" is a special action and does not go here
+const actions = ["examine", "use", "hit"]
+
+// stuff that happens when each action occurs
+// description will just render a description
+// nextRoom will cause the action to change the room
 const actionSets = {
   startDoorway: {
     hit: {
@@ -319,6 +327,8 @@ const actionSets = {
   },
 }
 
+// contains room descriptions, exits, and connects grid locations with actions
+// first room should be called "start"
 const rooms = {
   // rooms
   start: {
@@ -833,6 +843,7 @@ const rooms = {
   },
 }
 
+// refactor this later
 const tasks = [
   {
     key: "deathChair",
@@ -884,6 +895,6 @@ const tasks = [
   },
 ]
 
-const data = { actionSets, rooms, tasks }
+const data = { actions, actionSets, rooms, tasks }
 
 export default data

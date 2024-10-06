@@ -4,7 +4,7 @@ import data from "../data"
 const GameContext = createContext()
 
 export const GameProvider = ({ children }) => {
-  const { rooms, tasks } = data
+  const { actions, rooms, tasks } = data
 
   const [currentRoom, setCurrentRoom] = useState(rooms.start)
   const [currentDescription, setCurrentDescription] = useState(
@@ -26,7 +26,7 @@ export const GameProvider = ({ children }) => {
   const taskPercentage = (completedTasks.length / tasks.length) * 100
 
   const [currentAction, setCurrentAction] = useState("default")
-  const actions = ["examine", "use", "hit"]
+
   return (
     <GameContext.Provider
       value={{
